@@ -6,6 +6,17 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
     additionalPages.push({
+        id: 'icons',
+        title: 'Icons',
+        src: indexSrc,
+        target: path.join(dest, '/icons.html'),
+        template: 'icons',
+        type: 'icons',
+        isDeprecated: false,
+        subPages: []
+    });
+
+    additionalPages.push({
         id: 'index',
         title: 'About',
         src: indexSrc,
