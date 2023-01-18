@@ -122,11 +122,11 @@ function mdImport(fileURL, options) {
     };
 
     if (path.extname(fileURL) === '.md') {
-        content = marked(fs.readFileSync(fileURL, 'utf8'));
+        content = marked.parse(fs.readFileSync(fileURL, 'utf8'));
     } else {
         const comment = getCommentContent(fileURL);
         isNeedStat = comment.isNeedStat;
-        content = marked(comment.content);
+        content = marked.parse(comment.content);
     }
 
     return {

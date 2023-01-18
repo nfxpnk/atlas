@@ -23,8 +23,6 @@ function withConfig(configPath) {
 
     const buildComponent = require('./buildcomponet.js')(atlasConfig, projectTree, projectImportsGraph,
         projectImports, writePage).buildComponent;
-    const buildReports = require('./buildreports.js')(atlasConfig, projectTree, projectImportsGraph,
-        writePage).buildReports;
 
     // Copy internal assets to the components destinations
     if (atlasConfig.copyInternalAssets) {
@@ -34,8 +32,7 @@ function withConfig(configPath) {
     return {
         'build': buildComponent,
         'buildAll': () => Promise.all([
-            buildComponent(),
-            buildReports()
+            buildComponent()
         ])
     };
 }
