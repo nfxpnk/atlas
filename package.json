@@ -11,10 +11,7 @@
     "scss",
     "css",
     "markdown",
-    "statistic",
-    "atlas",
-    "hologram",
-    "aigis"
+    "atlas"
   ],
   "engines": {
     "node": ">=12",
@@ -73,7 +70,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dimanech/atlas-guide.git"
+    "url": "git@github.com:nfxpnk/atlas-guide-custom.git"
   },
   "author": "Nechepurenko D.",
   "snyk": true
