@@ -2,10 +2,9 @@
 
 const path = require('path');
 
-module.exports = function(atlasConfig, projectTree, projectImportsGraph, projectImports) {
+module.exports = function(atlasConfig, projectTree) {
     const projectConstants = require(path.resolve(__dirname, '../../models/projectconstants.js'))(
         atlasConfig.constants, atlasConfig.scssAdditionalImportsArray, atlasConfig.constants.constantsFile);
-    const componentImports = src => projectImports.getFileImports(src, projectImportsGraph);
     const renderedPageContent = require(path.resolve(__dirname, '../../models/pagecontent.js'));
 
     // View models
@@ -17,13 +16,11 @@ module.exports = function(atlasConfig, projectTree, projectImportsGraph, project
         let tableOfContent;
         let stat;
         let page;
-        let isNeedStat;
 
         if (component.src !== '') { // could be stat pages or custom defined file
             page = renderedPageContent(component.src, {'title': component.title});
             content = page.content;
             tableOfContent = page.toc;
-            isNeedStat = page.isNeedStat;
         }
         switch (component.type) {
             case 'styleguide':

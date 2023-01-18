@@ -13,11 +13,11 @@ const isContentChanged = (url, content) => {
     }
 };
 
-module.exports = function(atlasConfig, projectTree, projectImportsGraph, projectImports, writePage) {
+module.exports = function(atlasConfig, projectTree, writePage) {
     // Utils
     const normalizePath = require('./utils/normalizepath');
     const prepareContent = require('./utils/preparecontent')(
-        atlasConfig, projectTree, projectImportsGraph, projectImports).prepareContent;
+        atlasConfig, projectTree).prepareContent;
 
     /**
      * Walk though documented files in project and generate particular page (if path specified)
