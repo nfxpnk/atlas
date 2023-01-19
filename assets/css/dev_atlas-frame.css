@@ -311,9 +311,6 @@ And used for hide parts of aside for this case.
 .atlas-nav__ln._landing svg {
 	display: none;
 }
-.atlas-nav__ln._category {
-	text-transform: capitalize;
-}
 .atlas-nav__ln._category svg {
 	transform: rotate(90deg);
 	width: 8px;

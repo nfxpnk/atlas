@@ -5,7 +5,7 @@ const path = require('path');
 function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
-    additionalPages.push({
+    additionalPages.unshift({
         id: 'icons',
         title: 'Icons',
         src: indexSrc,
@@ -28,7 +28,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     });
 
     if (constants.isDefined) {
-        additionalPages.push({
+        additionalPages.unshift({
             id: 'styleguide',
             title: 'Styleguide',
             src: '',

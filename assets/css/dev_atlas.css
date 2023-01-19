@@ -215,7 +215,6 @@ body {
 .atlas-ol,
 .atlas-code {
 	color: hsl(210deg, 0%, 35%);
-	max-width: 800px;
 }
 
 .atlas-content__inner .atlas-title_1 + .atlas-p {
