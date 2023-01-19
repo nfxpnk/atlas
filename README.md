@@ -77,7 +77,7 @@ Support regular markdown files in components folders and process it as guideline
 ### Installing
 
 ```
-npm install atlas-guide
+npm install nfxpnk/atlas-guide-custom
 ```
 
 ### Configuring

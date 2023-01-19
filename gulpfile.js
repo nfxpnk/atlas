@@ -42,7 +42,7 @@ gulp.task('server:up', done => {
             pathConfig.ui.guide.resources
         ],
         port: 5000,
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         livereload: {
             start: true,
             port: 9000
@@ -190,8 +190,8 @@ gulp.task('styles:watch', done => {
 /*
  * Guide generation
  */
-// if installed it should be require('atlas-guide');
-const atlas = require('./app/atlas-guide.js').withConfig('./.atlasrc.json');
+// if installed it should be require('atlas-guide-custom');
+const atlas = require('./app/atlas-guide-custom.js').withConfig('./.atlasrc.json');
 
 // Compile all components pages
 gulp.task('atlas:compile', done => atlas.build().then(done()));
