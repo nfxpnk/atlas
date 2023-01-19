@@ -108,7 +108,7 @@ function mdImport(fileURL, options) {
 
         const regularMarkup = mustache.render(elements.code, {
             code: code,
-            language: language.replace(/_.*$/, ''),
+            language: language,
             class: language
         });
 
