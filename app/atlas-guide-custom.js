@@ -3,6 +3,8 @@
 const path = require('path');
 
 function withConfig(configPath) {
+    console.log(configPath);
+
     // Prepare config and basic models
     const atlasConfig = require(path.resolve(__dirname, '../models/atlasconfig.js'))(configPath);
 

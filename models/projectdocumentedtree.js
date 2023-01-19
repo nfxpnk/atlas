@@ -109,21 +109,19 @@ function makeProjectTree(atlasConfig) {
             let resource = fs.statSync(target);
 
             if (resource.isFile()) {
+                const title = path.basename(name);
                 const isSass = path.extname(name) === '.scss';
                 if (isSass) {
                     docSet.coverage.all++;
                 }
                 if (isSass && isDocumented(target) && !isExcludedFile(name) && categoryName != '') {
                     docSet.coverage.covered++;
-
-                    const title = path.basename(name);
                     const title2 = path.basename(name, '.scss').replace(/^_/i, '');
                     const id = categoryName + title2;
                     config.push(pageConfig(id, title, target, false));
                 }
                 if (path.extname(name) === '.md' && !/^README\.md/.test(categoryName + name)) { // this is hacky way
                     // to exclude root README.md
-                    const title = path.basename(name, '.md');
                     const id = categoryName + 'doc-' + path.basename(name, '.md');
                     config.push(pageConfig(id, title, target, true));
                 }

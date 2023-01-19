@@ -315,9 +315,6 @@ And used for hide parts of aside for this case.
 	transform: rotate(90deg);
 	width: 8px;
 }
-.atlas-nav__ln._guide svg {
-	width: 14px;
-}
 .atlas-nav__ln._about svg {
 	margin-right: 3px;
 	width: 15px;
