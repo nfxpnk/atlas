@@ -22,6 +22,7 @@ const getFile = fileURL => fs.readFileSync(path.join(__dirname, fileURL), 'utf8'
 const elements = {
     'heading': getFile(markdownTemplates + 'heading.mustache'),
     'example': getFile(markdownTemplates + 'example.mustache'),
+    'exampleArray': getFile(markdownTemplates + 'example-array.mustache'),
     'code': getFile(markdownTemplates + 'code.mustache'),
     'hr': getFile(markdownTemplates + 'hr.mustache'),
     'paragraph': getFile(markdownTemplates + 'paragraph.mustache'),
@@ -100,8 +101,36 @@ function mdImport(fileURL, options) {
             language = '';
         }
 
+        let exampleArray = [];
+        const modifierRegexp = new RegExp('<!--\\s+Classes:([\\s\\S]+?)-->', 'ui');
+        if(modifierRegexp.test(code) === true) {
+            let modifierCode = code.split(modifierRegexp);
+            modifierCode[1] = modifierCode[1].trim();
+
+            let modifiers = modifierCode[1].split('\n');
+            let html = modifierCode[2].trim();
+
+            modifiers = modifiers.map(e => {
+                e = e.trim();
+                e = e.split(' - ');
+                e[0] = e[0].replace(/^[.:]/g, '');
+                return {modifier: e[0], name: e[1], html: html.replace(/\[modifier class\]/gm, e[0])};
+            });
+
+            for (let i = 0; i < modifiers.length; ++i) {
+                exampleArray.push(modifiers[i]);
+            }
+        }
+
         const exampleMarkup = mustache.render(elements.example, {
             code: code,
+            language: language.replace(/_example/, ''),
+            title: options.title + '-code-' + codeItemCount
+        });
+
+        const exampleMarkupArray = mustache.render(elements.exampleArray, {
+            code: code,
+            codeArray: exampleArray,
             language: language.replace(/_example/, ''),
             title: options.title + '-code-' + codeItemCount
         });
@@ -113,7 +142,14 @@ function mdImport(fileURL, options) {
         });
 
         codeItemCount += 1;
-        return language === 'html_example' ? exampleMarkup : regularMarkup;
+
+        if(exampleArray.length > 1) {
+            return exampleMarkupArray;
+        } else if(language === 'html_example') {
+            return exampleMarkup;
+        } else {
+            return regularMarkup
+        }
     };
 
     if (path.extname(fileURL) === '.md') {
