@@ -20,7 +20,7 @@ function withConfig(configPath) {
     const writePage = require('./utils/writepage.js')(atlasConfig, projectTree).writePage;
 
     const buildComponent = require('./buildcomponet.js')(
-        atlasConfig, projectTree, writePage).buildComponent;
+    atlasConfig, projectTree, writePage).buildComponent;
 
     // Copy internal assets to the components destinations
     if (atlasConfig.copyInternalAssets) {

@@ -8,11 +8,11 @@ try {
     switch (arg[0]) {
         case '--build':
         case '-b':
-            require('../app/atlas-guide').withConfig(arg[1]).buildAll();
+            require('../app/atlas-guide-custom').withConfig(arg[1]).buildAll();
             break;
         case '--version':
         case '-v':
-            console.log('atlas-guide ' + require('../package').version);
+            console.log('atlas-guide-custom ' + require('../package').version);
             break;
         case '--help':
         default:

@@ -52,9 +52,9 @@
     "last 2 Samsung versions",
     "last 2 ChromeAndroid versions"
   ],
-  "main": "app/atlas-guide.js",
+  "main": "app/atlas-guide-custom.js",
   "bin": {
-    "atlas-guide": "bin/atlas-guide.js"
+    "atlas-guide-custom": "bin/atlas-guide-custom.js"
   },
   "scripts": {
     "lint": "eslint ./ && stylelint ./",
