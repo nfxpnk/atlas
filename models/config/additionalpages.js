@@ -5,6 +5,17 @@ const path = require('path');
 function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
+    additionalPages.unshift({
+        id: 'icons',
+        title: 'Icons',
+        src: indexSrc,
+        target: path.join(dest, '/icons.html'),
+        template: 'icons',
+        type: 'icons',
+        isDeprecated: false,
+        subPages: []
+    });
+
     additionalPages.push({
         id: 'index',
         title: 'About',
@@ -17,7 +28,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     });
 
     if (constants.isDefined) {
-        additionalPages.push({
+        additionalPages.unshift({
             id: 'styleguide',
             title: 'Styleguide',
             src: '',

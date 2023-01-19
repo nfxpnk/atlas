@@ -46,7 +46,6 @@ renderer.hr = () => elements.hr;
 /**
  * @typedef {Object} commentContent
  * @property {string} content comment content
- * @property {boolean} isNeedStat do we disable statistic for component
  */
 /**
  * Get comment text from special type of CSS comment
@@ -61,20 +60,17 @@ function getCommentContent(filePath) {
 
     if (match !== null) {
         const fullContent = match[2];
-        const isNeedStat = !statRegexp.test(fullContent);
         const strippedContent = fullContent.replace(statRegexp, '');
 
         return {
-            content: isNeedStat ? fullContent : strippedContent,
-            isNeedStat: isNeedStat
+            content: strippedContent
         };
     } else {
         const colorizeYellow = str => '\x1b[33m' + str + '\x1b[0m';
         console.warn(colorizeYellow('Warn: ') + 'Atlas: Content for import not found in ' + filePath);
 
         return {
-            content: '',
-            isNeedStat: false
+            content: ''
         };
     }
 }
@@ -85,7 +81,6 @@ function mdImport(fileURL, options) {
     let codeItemCount = 0;
     let content = '';
     let toc = [];
-    let isNeedStat = false;
 
     // We need to keep renderers here because they changes page to page
     renderer.heading = (text, level) => {
@@ -122,17 +117,15 @@ function mdImport(fileURL, options) {
     };
 
     if (path.extname(fileURL) === '.md') {
-        content = marked(fs.readFileSync(fileURL, 'utf8'));
+        content = marked.parse(fs.readFileSync(fileURL, 'utf8'));
     } else {
         const comment = getCommentContent(fileURL);
-        isNeedStat = comment.isNeedStat;
-        content = marked(comment.content);
+        content = marked.parse(comment.content);
     }
 
     return {
         content: content,
-        toc: toc,
-        isNeedStat: isNeedStat
+        toc: toc
     };
 }
 

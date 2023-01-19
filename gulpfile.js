@@ -112,7 +112,7 @@ const sassCompile = config => {
         .pipe(sass({
             includePaths: config.alsoSearchIn,
             sourceMap: false,
-            outputStyle: 'compressed',
+            outputStyle: 'expanded',
             indentType: 'tab',
             indentWidth: '1',
             linefeed: 'lf',

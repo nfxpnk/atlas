@@ -15,16 +15,12 @@ function withConfig(configPath) {
     }
 
     const projectTree = require(path.resolve(__dirname, '../models/projectdocumentedtree.js'))(atlasConfig);
-    const projectImports = require(path.resolve(__dirname, '../models/projectimportsgraph.js'));
-    const projectImportsGraph = projectImports.getImportsGraph(atlasConfig);
 
     // Prepare Utils based on config
     const writePage = require('./utils/writepage.js')(atlasConfig, projectTree).writePage;
 
-    const buildComponent = require('./buildcomponet.js')(atlasConfig, projectTree, projectImportsGraph,
-        projectImports, writePage).buildComponent;
-    const buildReports = require('./buildreports.js')(atlasConfig, projectTree, projectImportsGraph,
-        writePage).buildReports;
+    const buildComponent = require('./buildcomponet.js')(
+        atlasConfig, projectTree, writePage).buildComponent;
 
     // Copy internal assets to the components destinations
     if (atlasConfig.copyInternalAssets) {
@@ -34,8 +30,7 @@ function withConfig(configPath) {
     return {
         'build': buildComponent,
         'buildAll': () => Promise.all([
-            buildComponent(),
-            buildReports()
+            buildComponent()
         ])
     };
 }
