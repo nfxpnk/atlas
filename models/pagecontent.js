@@ -114,8 +114,10 @@ function mdImport(fileURL, options) {
             modifiers = modifiers.map(e => {
                 e = e.trim();
                 e = e.split(' - ');
-                e[0] = e[0].replace(/[.:]/g, '');
-                return {modifier: e[0], name: e[1], html: html.replace(/\[modifier class\]/gm, e[0])};
+                let className = e[0];
+                e[0] = e[0].replace(/\./g, '');
+                e[0] = e[0].replace(/:/g, 'pseudo-class-');
+                return {modifier: e[0], class: className, name: e[1], html: html.replace(/\[modifier class\]/gm, e[0])};
             });
 
             for (let i = 0; i < modifiers.length; ++i) {
