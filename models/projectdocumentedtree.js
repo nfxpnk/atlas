@@ -109,7 +109,6 @@ function makeProjectTree(atlasConfig) {
 
             if (resource.isFile()) {
                 const title = path.basename(name);
-                const isDoc = isDocumented(target);
                 const isSass = path.extname(name) === '.scss';
                 if (isSass) {
                     docSet.coverage.all++;
@@ -118,12 +117,12 @@ function makeProjectTree(atlasConfig) {
                     docSet.coverage.covered++;
                     const title2 = path.basename(name, '.scss').replace(/^_/i, '');
                     const id = categoryName + title2;
-                    config.push(pageConfig(id, title, target, isDoc, false));
+                    config.push(pageConfig(id, title, target, isDocumented(target), false));
                 }
                 if (path.extname(name) === '.md' && !/^README\.md/.test(categoryName + name)) { // this is hacky way
                     // to exclude root README.md
                     const id = categoryName + 'doc-' + path.basename(name, '.md');
-                    config.push(pageConfig(id, title, target, isDoc, true));
+                    config.push(pageConfig(id, title, target, true, true));
                 }
             } else if (resource.isDirectory() && !isExcludedDirectory(name)) {
                 config.push(categoryConfig(name));
