@@ -22,7 +22,7 @@ It designed primarily as "style-guide driven development" tool with focus on spl
 * blazing fast thanks to Mustache and Marked. It primary designed as development platform;
 * supports incremental builds, so only changed pages could be updated;
 * could be setup with live reload or "hot" reload;
-* small list of dependencies (Mustache, Marked, PostCSS, CSSStats, ImportsGraph, D3 and Lodash parts);
+* small list of dependencies (Mustache, Marked, PostCSS, ImportsGraph, D3 and Lodash parts);
 * all internal templates and styles could be overwritten on project level;
 * could be used as simple guide docs generator;
 * Hologram compatible (without front matter section);
@@ -56,7 +56,6 @@ Support regular markdown files in components folders and process it as guideline
 
 ### Reports
 
-* imports graph;
 * cross components dependencies graph;
 * sass components files sizes;
 * project statistical reports:
