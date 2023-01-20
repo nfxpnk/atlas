@@ -3,32 +3,40 @@
 
 	AtlasStateGenerator = (function() {
 		var pseudo_selectors;
-
 		pseudo_selectors = ['hover', 'enabled', 'disabled', 'active', 'visited', 'focus', 'target', 'checked', 'empty', 'first-of-type', 'last-of-type', 'first-child', 'last-child'];
 
+		var pseudos = new RegExp("(\\:" + (pseudo_selectors.join('|\\:')) + ")", "g");
+
 		function AtlasStateGenerator() {
-			var idx, replaceRule, rule, stylesheet, _i, _len, _len2, _ref;
+			var replaceRule, rule, stylesheet, _i, _len, _ref;
 
 			try {
 				_ref = document.styleSheets;
 				for (_i = 0, _len = _ref.length; _i < _len; _i++) {
 					stylesheet = _ref[_i];
 					if (stylesheet.href && stylesheet.href.indexOf(document.domain) >= 0) {
+						//console.log(stylesheet.href);
 						this.insertRules(stylesheet.cssRules);
 					}
 				}
-			} catch (_error) {}
+			} catch (_error) {
+				console.log(_error);
+			}
 		}
 
 		AtlasStateGenerator.prototype.insertRules = function(rules) {
-			var pseudos = new RegExp("(\\:" + (pseudo_selectors.join('|\\:')) + ")", "g");
-			for (idx = 0, _len2 = rules.length; idx < _len2; idx++) {
+			//console.log('insertRules');
+			let idx;
+			for (idx = 0; idx < rules.length; idx++) {
+
 				rule = rules[idx];
-				console.log(rule);
-				console.log(rule.type);
+				//console.log(rule.type);
+				//console.log(pseudos.test(rule.selectorText), rule.selectorText);
 				if (rule.type === CSSRule.MEDIA_RULE) {
+					//console.log('CSSRule.MEDIA_RULE');
 					this.insertRules(rule.cssRules);
 				} else if ((rule.type === CSSRule.STYLE_RULE) && pseudos.test(rule.selectorText)) {
+					//console.log('CSSRule.STYLE_RULE');
 					replaceRule = function(matched, stuff) {
 						return matched.replace(/\:/g, '.pseudo-class-');
 					};
@@ -39,6 +47,7 @@
 		};
 
 		AtlasStateGenerator.prototype.insertRule = function(rule) {
+			//console.log(rule);
 			var headEl, styleEl;
 			headEl = document.getElementsByTagName('head')[0];
 			styleEl = document.createElement('style');
