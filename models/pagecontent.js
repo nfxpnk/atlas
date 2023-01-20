@@ -114,7 +114,7 @@ function mdImport(fileURL, options) {
             modifiers = modifiers.map(e => {
                 e = e.trim();
                 e = e.split(' - ');
-                e[0] = e[0].replace(/^[.:]/g, '');
+                e[0] = e[0].replace(/[.:]/g, '');
                 return {modifier: e[0], name: e[1], html: html.replace(/\[modifier class\]/gm, e[0])};
             });
 
