@@ -38,7 +38,7 @@
 
             if (term.length && ~elementText.indexOf(term)) {
                 asidePanel.classList.add(hasResults);
-                links[0].focus();
+                //links[0].focus();
                 link.classList.add(isRelevant);
             } else {
                 link.classList.remove(isRelevant);
