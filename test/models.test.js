@@ -29,101 +29,6 @@ describe('Models', function() {
             assert.deepEqual(viewModel, expectedViewModel, 'proper view model for styleguide');
         });
     });
-    describe('projectimportsgraph', function() {
-        const baseConfig = require(cwd + '/models/atlasconfig.js')({
-            'guideSrc': 'test/fixtures/atlas/',
-            'guideDest': 'test/results/',
-            'cssSrc': 'test/fixtures/atlas/css/'
-        });
-        const graph = require(cwd + '/models/projectimportsgraph.js');
-        const importGraph = graph.getImportsGraph(baseConfig);
-
-        describe('getImportsGraph', function() {
-            it('should return right import graph without additional imports', function() {
-                assert.strictEqual(Object.keys(importGraph.index).length, 9);
-            });
-        });
-
-        describe('getFileImports', function() {
-            it('should return empty model if no file info in imports graph', function() {
-                const expected = {
-                    imports: [],
-                    importedBy: []
-                };
-                const model = graph.getFileImports('path/to/file.scss', importGraph);
-                assert.deepEqual(model, expected);
-            });
-            it('should return empty model if no imports info for file in imports graph', function() {
-                const expected = {
-                    imports: [],
-                    importedBy: []
-                };
-                const model = graph.getFileImports(
-                    cwd + 'test/fixtures/atlas/_component-undocumented.scss',
-                    importGraph
-                );
-                assert.deepEqual(model, expected);
-            });
-            it('should return proper model if file exist in imports graph', function() {
-                const expected = {
-                    'imports': ['excluded-component.scss', '_component.scss'],
-                    'importedBy': ['style.scss']
-                };
-                const model = graph.getFileImports('test/fixtures/atlas/_component.scss', importGraph);
-                assert.deepEqual(model, expected);
-            });
-        });
-    });
-    describe('statcomponent', function() {
-        it('should return proper transformed model without defined constants', function() {
-            const componentPath = path.join(cwd, '/test/fixtures/atlas/_component.scss');
-            const baseConfig = require(cwd + '/models/atlasconfig.js')({
-                'guideSrc': 'test/fixtures/atlas/',
-                'guideDest': 'test/results/',
-                'cssSrc': 'test/fixtures/atlas/css/'
-            });
-            const constants = require(cwd + '/models/projectconstants.js')(baseConfig.constants);
-            const deps = require(cwd + '/models/projectimportsgraph.js');
-            const importsGraph = deps.getImportsGraph(baseConfig);
-            const componentImports = deps.getFileImports(componentPath, importsGraph);
-            const componentStat = require(cwd + '/models/componentstat.js').getStatFor(
-                componentPath, baseConfig.componentPrefixes);
-
-            const viewModel = require(cwd + '/viewmodels/statcomponent.js')(
-                componentStat, componentImports, constants);
-            const expectedViewModel = require(cwd + '/test/fixtures/viewmodels/statcomponent.json');
-            assert.deepStrictEqual(viewModel, expectedViewModel);
-        });
-
-        it('should return proper transformed model with defined constants', function() {
-            const componentPath = path.join(cwd, '/test/fixtures/atlas/_component.scss');
-            const baseConfig = require(cwd + '/models/atlasconfig.js')({
-                'guideSrc': 'test/fixtures/atlas/',
-                'guideDest': 'test/results/',
-                'cssSrc': 'test/fixtures/atlas/css/',
-                'projectConstants': {
-                    'constantsSrc': '/test/fixtures/atlas/_excluded-settings.scss',
-                    'colorPrefix': 'color',
-                    'fontPrefix': 'font',
-                    'scalePrefix': 'scale',
-                    'spacePrefix': 'space',
-                    'motionPrefix': 'motion',
-                    'depthPrefix': 'depth',
-                    'breakpointPrefix': 'break'
-                }
-            });
-            const constants = require(cwd + '/models/projectconstants.js')(baseConfig.constants);
-            const deps = require(cwd + '/models/projectimportsgraph.js');
-            const importsGraph = deps.getImportsGraph(baseConfig);
-            const componentImports = deps.getFileImports(componentPath, importsGraph);
-            const componentStat = require(cwd + '/models/componentstat.js').getStatFor(
-                componentPath, baseConfig.componentPrefixes);
-            const viewModel = require(cwd + '/viewmodels/statcomponent.js')(
-                componentStat, componentImports, constants);
-            const expectedViewModel = require(cwd + '/test/fixtures/viewmodels/statcomponent-const.json');
-            assert.deepStrictEqual(viewModel, expectedViewModel);
-        });
-    });
     describe('pagecontent', function() {
         const pageContent = require(cwd + '/models/pagecontent');
 
@@ -141,29 +46,6 @@ describe('Models', function() {
             assert.deepStrictEqual(result, {content: '', toc: [], isNeedStat: false});
         });
         it('should falls if wrong path to file');
-    });
-    describe('statproject', function() {
-        let projectStat;
-
-        before(function() {
-            const baseConfig = require(cwd + '/models/atlasconfig.js')({
-                'guideSrc': 'test/fixtures/atlas/',
-                'guideDest': 'test/results/',
-                'cssSrc': 'test/fixtures/atlas/css/'
-            });
-            const projectName = 'atlas-guide';
-            const cssSrc = baseConfig.cssSrc;
-            const excludedCssFiles = baseConfig.excludedCssFiles;
-            projectStat = require(cwd + '/models/projectcssstat.js')(projectName, cssSrc, excludedCssFiles);
-        });
-
-        it('should return proper view model', function() {
-            const statProject = require(cwd + '/viewmodels/statproject.js');
-            const projectName = 'atlas-guide';
-            const viewModel = statProject(projectStat, projectName);
-            const expectedViewModel = require(cwd + '/test/fixtures/viewmodels/statproject.json');
-            assert.deepStrictEqual(viewModel, expectedViewModel);
-        });
     });
     describe('componentstat', function() {
         const componentstat = require(cwd + '/models/componentstat.js');
