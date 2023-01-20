@@ -109,7 +109,6 @@ function mdImport(fileURL, options) {
 
             let modifiers = modifierCode[1].split('\n');
             let html = modifierCode[2].trim();
-            exampleArray.push({modifier: '', name: 'Default', html: html});
 
             modifiers = modifiers.map(e => {
                 e = e.trim();
