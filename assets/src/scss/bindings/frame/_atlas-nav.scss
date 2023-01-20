@@ -80,6 +80,11 @@
 		&._deprecated {
 			text-decoration: line-through;
 		}
+
+		&._empty {
+			opacity: 0.6;
+			font-style: italic;
+		}
 	}
 
 	/* stylelint-disable */

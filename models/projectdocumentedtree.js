@@ -9,8 +9,6 @@ let guideDest;
 let templates;
 
 function isDocumented(filePath) {
-    return true;
-
     const file = fs.readFileSync(filePath, 'utf8');
     const docComment = /\/\*md(\r\n|\n)(((\r\n|\n)|.)*?)\*\//g;
     const exec = docComment.exec(file);
@@ -40,7 +38,7 @@ function removeEmptyCategories(collection) {
 const isExcludedFile = name => excludedSassFiles.test(name);
 const isExcludedDirectory = name => excludedDirs.test(name);
 
-function pageConfig(id, title, target, isDocs) {
+function pageConfig(id, title, target, isDocumented, isDocs) {
     return {
         id: id,
         title: title,
@@ -49,6 +47,7 @@ function pageConfig(id, title, target, isDocs) {
         target: guideDest + id + '.html',
         template: isDocs ? templates.docs : templates.component,
         isDeprecated: /deprecated/.test(title),
+        noDocumentation: !isDocumented,
         subPages: []
     };
 }
@@ -110,20 +109,21 @@ function makeProjectTree(atlasConfig) {
 
             if (resource.isFile()) {
                 const title = path.basename(name);
+                const isDoc = isDocumented(target);
                 const isSass = path.extname(name) === '.scss';
                 if (isSass) {
                     docSet.coverage.all++;
                 }
-                if (isSass && isDocumented(target) && !isExcludedFile(name) && categoryName != '') {
+                if (isSass && !isExcludedFile(name) && categoryName != '') {
                     docSet.coverage.covered++;
                     const title2 = path.basename(name, '.scss').replace(/^_/i, '');
                     const id = categoryName + title2;
-                    config.push(pageConfig(id, title, target, false));
+                    config.push(pageConfig(id, title, target, isDoc, false));
                 }
                 if (path.extname(name) === '.md' && !/^README\.md/.test(categoryName + name)) { // this is hacky way
                     // to exclude root README.md
                     const id = categoryName + 'doc-' + path.basename(name, '.md');
-                    config.push(pageConfig(id, title, target, true));
+                    config.push(pageConfig(id, title, target, isDoc, true));
                 }
             } else if (resource.isDirectory() && !isExcludedDirectory(name)) {
                 config.push(categoryConfig(name));
