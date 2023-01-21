@@ -1,21 +1,11 @@
 # Atlas-guide
 
-[![Coverage Status](https://coveralls.io/repos/github/dimanech/atlas-guide/badge.svg?branch=master)](https://coveralls.io/github/dimanech/atlas-guide?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f37cf365f3315cfc287c/maintainability)](https://codeclimate.com/github/dimanech/atlas-guide/maintainability)
-[![Actions Status](https://github.com/dimanech/atlas-guide/workflows/tests-master/badge.svg)](https://github.com/dimanech/atlas-guide/actions)
-[![Greenkeeper badge](https://badges.greenkeeper.io/dimanech/atlas-guide.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/dimanech/atlas-guide/badge.svg?targetFile=package.json)](https://snyk.io/test/github/dimanech/atlas-guide?targetFile=package.json)
-[![npm version](https://badge.fury.io/js/atlas-guide.svg)](https://badge.fury.io/js/atlas-guide)
-
 Atlas is living style-guide, pattern library, guidelines and documentation static site generator with extensive styles monitoring and Sass components reports. It generates documentation from markdown files and documentation comment in `scss` files.
 
 It is opinionated. Because it is, probably, impossible to cover all cases in CSS/Sass.
 It designed primarily as "style-guide driven development" tool with focus on splited files approach and incapsulated components with normative Sass imports structure.
 
-* [Live example](https://dimanech.github.io/atlas-guide/)
-* [Video example](https://youtu.be/Vohb_Xl6S54)
-
-![atlas-component](docs/screens/atlas-component.jpeg)
+* [Live example](https://nfxpnk.github.io/atlas/)
 
 ## Features
 
