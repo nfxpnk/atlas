@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
 const mustache = require('mustache');
+const c = require('ansi-colors');
 const renderer = new marked.Renderer();
 
 marked.setOptions({
@@ -67,8 +68,7 @@ function getCommentContent(filePath) {
             content: strippedContent
         };
     } else {
-        const colorizeYellow = str => '\x1b[33m' + str + '\x1b[0m';
-        console.warn(colorizeYellow('Warn: ') + 'Atlas: Content for import not found in ' + filePath);
+        // console.warn(c.yellow('Warn: ') + 'Atlas: Content for import not found in ' + filePath);
 
         return {
             content: ''
