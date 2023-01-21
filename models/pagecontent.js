@@ -22,7 +22,7 @@ const getFile = fileURL => fs.readFileSync(path.join(__dirname, fileURL), 'utf8'
 const elements = {
     'heading': getFile(markdownTemplates + 'heading.mustache'),
     'example': getFile(markdownTemplates + 'example.mustache'),
-    'exampleArray': getFile(markdownTemplates + 'example-array.mustache'),
+    'exampleArray': getFile(markdownTemplates + 'exampleArray.mustache'),
     'code': getFile(markdownTemplates + 'code.mustache'),
     'hr': getFile(markdownTemplates + 'hr.mustache'),
     'paragraph': getFile(markdownTemplates + 'paragraph.mustache'),
@@ -130,6 +130,12 @@ function mdImport(fileURL, options) {
             title: options.title + '-code-' + codeItemCount
         });
 
+        const examplePugMarkup = mustache.render(elements.example, {
+            code: 'PUG COMPILED',
+            language: language.replace(/pug_example/, 'html'),
+            title: options.title + '-code-' + codeItemCount
+        });
+
         const exampleMarkupArray = mustache.render(elements.exampleArray, {
             code: code,
             codeArray: exampleArray,
@@ -149,6 +155,8 @@ function mdImport(fileURL, options) {
             return exampleMarkupArray;
         } else if(language === 'html_example') {
             return exampleMarkup;
+        } else if(language === 'pug_example') {
+            return examplePugMarkup;
         } else {
             return regularMarkup
         }
