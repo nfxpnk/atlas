@@ -28,6 +28,6 @@ logs
 node_modules
 .nyc_output
 
-*.html
+
 atlas/*
 
