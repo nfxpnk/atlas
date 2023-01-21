@@ -29,5 +29,5 @@ node_modules
 .nyc_output
 
 
-atlas/*
+atlas/*.html
 
