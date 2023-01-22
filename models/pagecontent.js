@@ -6,6 +6,7 @@ const marked = require('marked');
 const mustache = require('mustache');
 const c = require('ansi-colors');
 const pug = require('pug');
+const loremIpsum = require('lorem-ipsum').loremIpsum;
 const renderer = new marked.Renderer();
 
 marked.setOptions({
@@ -152,9 +153,11 @@ function mdImport(fileURL, options) {
         } else if(language === 'html_example') {
             return exampleMarkup;
         } else if(language === 'pug_example') {
+            let pugFn = pug.compile(code, {pretty: true});
+            let pugCompiled = pugFn().trim();
             return mustache.render(elements.examplePug, {
                 pug: code,
-                code: pug.compile(code),
+                code: pugCompiled,
                 title: options.title + '-code-' + codeItemCount
             });
         } else {
