@@ -6,8 +6,19 @@ const marked = require('marked');
 const mustache = require('mustache');
 const c = require('ansi-colors');
 const pug = require('pug');
-const loremIpsum = require('lorem-ipsum').loremIpsum;
+const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 const renderer = new marked.Renderer();
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4
+  }
+});
 
 marked.setOptions({
     renderer: renderer,
@@ -156,9 +167,10 @@ function mdImport(fileURL, options) {
             let pugFn = pug.compile(code, {pretty: true});
             let pugCompiled = pugFn().trim();
 
-            const re = new RegExp('{lorem}', 'i');
-            while(re.test(pugCompiled)){
-                pugCompiled = pugCompiled.replace('{lorem}', loremIpsum());
+            const re = new RegExp('{lorem', 'i');
+            while(re.test(pugCompiled)) {
+                pugCompiled = pugCompiled.replace('{lorem}', lorem.generateSentences(1));
+                pugCompiled = pugCompiled.replace('{loremWord}', lorem.generateWords(1));
             }
 
             return mustache.render(elements.examplePug, {
