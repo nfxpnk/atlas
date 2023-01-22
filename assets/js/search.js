@@ -6,16 +6,16 @@
     const searchClearBtn = document.getElementById('js-atlas-search-clear');
     const links = document.querySelectorAll('.js-atlas-nav-ln');
 
-    const waiteForSearch = 'js-searching';
+    const waitForSearch = 'js-searching';
     const hasResults = 'js-found';
     const isRelevant = 'js-relevant';
 
     function startSearch() {
-        asidePanel.classList.add(waiteForSearch);
+        asidePanel.classList.add(waitForSearch);
     }
 
     function finishSearch() {
-        asidePanel.classList.remove(waiteForSearch);
+        asidePanel.classList.remove(waitForSearch);
     }
 
     function clearSearch() {
