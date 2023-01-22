@@ -1,6 +1,8 @@
 'use strict';
 
 const path = require('path');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 
 function withConfig(configPath) {
     console.log(configPath);
@@ -10,6 +12,7 @@ function withConfig(configPath) {
 
     // If config has no proper fields
     if (atlasConfig.isCorrupted) {
+        // log
         return {
             'build': () => new Promise(resolve => resolve('Config is corrupted')),
             'buildAll': () => new Promise(resolve => resolve('Config is corrupted'))
@@ -25,9 +28,8 @@ function withConfig(configPath) {
         atlasConfig, projectTree, writePage).buildComponent;
 
     // Copy internal assets to the components destinations
-    if (atlasConfig.copyInternalAssets) {
-        require(path.join(__dirname, '/utils/copyassets.js'))(atlasConfig.internalAssetsPath, atlasConfig.guideDest);
-    }
+    log(atlasConfig.internalAssetsPath, atlasConfig.guideDest);
+    require(path.join(__dirname, '/utils/copyassets.js'))(atlasConfig.internalAssetsPath, atlasConfig.guideDest);
 
     return {
         'build': buildComponent,

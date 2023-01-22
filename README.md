@@ -273,7 +273,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
     "excludedCssFiles": "dev_",
     "excludedSassFiles": "dev_",
     "excludedDirs": "dev_",
-    "copyInternalAssets": true,
     "createDestFolder": false,
     "indexPageSource": "project-root/path/to/file.md",
     "templates": {
@@ -325,7 +324,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
 * `excludedCssFiles` {regexp} – CSS files that would not be processed in statistical reports.
 * `excludedSassFiles` {regexp} – Sass files that would not be processed in statistical reports.
 * `excludedDirs` {regexp} – directories that will be excluded from doc sets.
-* `copyInternalAssets` {bool} – copy internal Atlas assets (CSS and JS) to generated folder on each start. This would be usefull if you use completly custom style for guide and support it separatly.
 * `createDestFolder` {bool} - create destination directory if it is not exist. Default if `false`.
 * `indexPageSource` {string} - path to custom markdown file that will be used in index.html. Otherwise atlas try to find README.md in guide src and in the root of the project.
 * `templates`– use this field to use your own templates for guide generation.
