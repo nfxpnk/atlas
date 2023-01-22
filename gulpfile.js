@@ -31,7 +31,8 @@ gulp.task('server:up', done => {
 
     connect.server({
         root: [
-            config.guideDest
+            config.guideDest,
+            config.projectCompiledFiles
         ],
         port: 5000,
         host: '0.0.0.0',

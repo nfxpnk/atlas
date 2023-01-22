@@ -32,3 +32,4 @@ node_modules
 atlas/*.html
 atlas/assets
 
+views/includes/partials/project-head.mustache
