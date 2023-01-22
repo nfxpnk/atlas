@@ -19,7 +19,7 @@ const fillTemplatesConfig = (templatesConfig, internalTemplatesPath, name) => {
                 templates[template] = templatePath;
                 return;
             } else {
-                printMessage('warn', '"' + template + '" ' + name + ' is declared, but file not found. ' +
+                printMessage('warn', '"' + template + ' (' + templatePath + ')" ' + name + ' is declared, but file not found. ' +
                     'Internal partial used for this include.');
             }
         }
