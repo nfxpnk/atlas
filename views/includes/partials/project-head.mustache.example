@@ -3,5 +3,5 @@
 <script>
     window.contexts = ["global"]
 </script>
-<script async="async" src="../app_blue_rabbit.js" crossorigin="anonymous"></script>
+<script async="async" src="js.js" crossorigin="anonymous"></script>
 
