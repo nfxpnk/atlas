@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const excludedDir = 'src';
+const excludedDir = 'scss';
 
 /**
  * Copy internal assets to specified Atlas destination directory, so they will be available in generated static files.
@@ -50,6 +50,7 @@ function copyAssetsFiles(assetsRoot, assetsSrc, assetsDest) {
 
 function copyAssets(assetsSrc, assetsDest) {
     const dest = path.join(assetsDest, 'assets');
+
     if (!fs.existsSync(dest)) {
         fs.mkdirSync(dest);
     }
