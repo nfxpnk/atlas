@@ -3,27 +3,23 @@
 const path = require('path');
 const gulp = require('gulp');
 const connect = require('gulp-connect');
+const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+
 const config = require('./.atlasrc.json');
+
 const log = require('fancy-log');
 const c = require('ansi-colors');
 
-const pathConfig = {
-    'ui': {
-        'core': {
-            'resources': './',
-            'sass': {
-                'src': 'assets/src/scss/',
-                'dest': 'assets/css/'
-            }
-        },
-        'guide': {
-            'resources': 'atlas/'
-        },
-        'lib': {
-            'resources': ''
-        }
-    }
-};
+const atlas = require('./app/atlas-guide-custom.js').withConfig('./.atlasrc.json');
+
+
+// Atlas styles source
+config.sassSrc = 'assets/scss/';
+config.sassDest = 'assets/css/';
+config.alsoSearchIn = '';
 
 let changedFilePath = '';
 let affectedFilesPaths = [];
@@ -40,8 +36,7 @@ gulp.task('server:up', done => {
 
     connect.server({
         root: [
-            pathConfig.ui.core.resources,
-            pathConfig.ui.guide.resources
+            config.guideDest
         ],
         port: 5000,
         host: '0.0.0.0',
@@ -58,18 +53,9 @@ gulp.task('server:up', done => {
     done();
 });
 
-// We have 2 separate tasks for reload because in one case 1) we need to reload only styles
-// in other – full page reload; 2) after styles compiled wait for atlas compilation, – in other
-// reload immediate.
-
-// Reload the CSS links right after 'styles:compile:incremental' task is returned
-gulp.task('server:reload:styles', done => {done();});
-    // gulp.src(affectedFilesPaths) // css only reload
-    //     .pipe(connect.reload()));
-
 // Reload the page right after 'atlas:compile:incremental' task is returned
 gulp.task('server:reload:guide', () =>
-    gulp.src(pathConfig.ui.guide.resources + '*.html') // full page reload
+    gulp.src(config.guideDest + '*.html') // full page reload
         .pipe(connect.reload()));
 
 /*
@@ -78,7 +64,7 @@ gulp.task('server:reload:guide', () =>
 
 const notifyChange = path => {
     changedFilePath = path;
-    console.log(`[CHANGED:] \x1b[32m${path}\x1b[0m`);
+    log('[CHANGED:] ' + c.green(path));
 };
 
 /**
@@ -86,18 +72,14 @@ const notifyChange = path => {
  * @param {Object} config
  */
 const sassCompile = config => {
-    const sass = require('gulp-sass')(require('sass'));
-    const postcss = require('gulp-postcss');
-    const autoprefixer = require('autoprefixer');
-    const sourcemaps = require('gulp-sourcemaps');
-
     const postProcessors = [
         autoprefixer({
             flexbox: 'no-2009'
         })
     ];
 
-    console.log(`[COMPILE:] \x1b[35m${config.source}\x1b[0m`);
+    log('[SCSS COMPILE:] ' + c.magenta(config.source));
+    log('[SCSS COMPILE OUTPUT:] ' + c.magenta(config.dest));
 
     return gulp.src(config.source, {allowEmpty: true})
         .pipe(sourcemaps.init({
@@ -115,35 +97,42 @@ const sassCompile = config => {
             errLogToConsole: true
         }))
         .on('error', function (error) {
-            console.log('\x07');
-            console.error('\x1b[35m' + error.message + '\x1b[0m');
+            log(c.red(error.message));
             this.emit('end');
         })
         .pipe(postcss(postProcessors))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.dest));
+        .pipe(gulp.dest(config.dest))
+        .pipe(connect.reload());
 };
 
 // Compile all Sass files
 gulp.task('styles:compile:all', () => sassCompile({
-    source: pathConfig.ui.core.sass.src + '*.scss',
-    dest: pathConfig.ui.core.sass.dest,
-    alsoSearchIn: [pathConfig.ui.lib.resources]
+    source: config.sassSrc + '*.scss',
+    dest: config.sassDest,
+    alsoSearchIn: [config.alsoSearchIn]
+}));
+
+// Compile all Sass files
+gulp.task('styles:compile:all2', () => sassCompile({
+    source: config.sassSrc + '*.scss',
+    dest: config.guideDest + 'assets/css/',
+    alsoSearchIn: [config.alsoSearchIn]
 }));
 
 // Compile all Sass files and watch for changes
-gulp.task('styles:watch', done => {
+gulp.task('scss:watch', done => {
     gulp.watch(
-        pathConfig.ui.core.sass.src + '**/*.scss',
-        gulp.series('styles:compile:all', 'server:reload:styles')
+        config.sassSrc + '**/*.scss',
+        gulp.series('styles:compile:all2')
     ).on('change', notifyChange);
-    done();
+    return done();
 });
 
 /*
  * Guide generation
  */
-const atlas = require('./app/atlas-guide-custom.js').withConfig('./.atlasrc.json');
+
 
 // Compile all components pages
 gulp.task('atlas:compile', done => atlas.build().then(done()));
@@ -156,8 +145,8 @@ gulp.task('atlas:compile:all', done => atlas.buildAll().then(done()));
 // Compile Guide and watch changes
 gulp.task('atlas:watch', done => {
     gulp.watch(
-        [pathConfig.ui.core.sass.src + '**/*.scss', pathConfig.ui.core.sass.src + '**/*.md'],
-        gulp.series('styles:compile:all', 'atlas:compile:incremental', 'server:reload:guide')
+        [config.guideSrc + '**/*.scss', config.guideSrc + '**/*.md'],
+        gulp.series('atlas:compile:incremental', 'server:reload:guide')
     ).on('change', notifyChange);
     return done();
 });
@@ -165,7 +154,10 @@ gulp.task('atlas:watch', done => {
 /*
  * Complex tasks
  */
-gulp.task('dev', gulp.parallel('server:up', 'styles:compile:all', 'styles:watch'));
+
+gulp.task('dev', gulp.parallel('server:up', 'styles:compile:all2', 'scss:watch'));
+
+
 // change to atlas:compile for regular projects, for our cases we compile all atlas in dev workflow
-gulp.task('dev:atlas', gulp.parallel('server:up', 'styles:compile:all', 'atlas:compile:all', 'atlas:watch'));
+gulp.task('dev:atlas', gulp.parallel('server:up', 'atlas:compile:all', 'atlas:watch'));
 gulp.task('build', gulp.parallel('styles:compile:all', 'atlas:compile:all'));
