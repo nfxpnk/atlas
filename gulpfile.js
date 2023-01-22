@@ -7,14 +7,10 @@ const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
-
-const config = require('./.atlasrc.json');
-
 const log = require('fancy-log');
 const c = require('ansi-colors');
-
 const atlas = require('./app/atlas-guide-custom.js').withConfig('./.atlasrc.json');
-
+const config = require('./.atlasrc.json');
 
 // Atlas styles source
 config.sassSrc = 'assets/scss/';
@@ -22,7 +18,6 @@ config.sassDest = 'assets/css/';
 config.alsoSearchIn = '';
 
 let changedFilePath = '';
-let affectedFilesPaths = [];
 
 /*
  * Local server for static assets with live reload
@@ -106,14 +101,14 @@ const sassCompile = config => {
         .pipe(connect.reload());
 };
 
-// Compile all Sass files
+// Compile assets scss
 gulp.task('styles:compile:all', () => sassCompile({
     source: config.sassSrc + '*.scss',
     dest: config.sassDest,
     alsoSearchIn: [config.alsoSearchIn]
 }));
 
-// Compile all Sass files
+// Compile assets scss into guide destination
 gulp.task('styles:compile:all2', () => sassCompile({
     source: config.sassSrc + '*.scss',
     dest: config.guideDest + 'assets/css/',
@@ -126,7 +121,7 @@ gulp.task('scss:watch', done => {
         config.sassSrc + '**/*.scss',
         gulp.series('styles:compile:all2')
     ).on('change', notifyChange);
-    return done();
+    done();
 });
 
 /*
@@ -148,7 +143,7 @@ gulp.task('atlas:watch', done => {
         [config.guideSrc + '**/*.scss', config.guideSrc + '**/*.md'],
         gulp.series('atlas:compile:incremental', 'server:reload:guide')
     ).on('change', notifyChange);
-    return done();
+    done();
 });
 
 /*

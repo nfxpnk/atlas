@@ -155,6 +155,12 @@ function mdImport(fileURL, options) {
         } else if(language === 'pug_example') {
             let pugFn = pug.compile(code, {pretty: true});
             let pugCompiled = pugFn().trim();
+
+            const re = new RegExp('{lorem}', 'i');
+            while(re.test(pugCompiled)){
+                pugCompiled = pugCompiled.replace('{lorem}', loremIpsum());
+            }
+
             return mustache.render(elements.examplePug, {
                 pug: code,
                 code: pugCompiled,
