@@ -1,7 +1,7 @@
 # Test
 
 ```html
-<div class="test"></div>
+<div class="test">222</div>
 ```
 
 ```scss
@@ -34,7 +34,7 @@ block content
 - var modifiers = ["m-green", "m-orange", "m-blue", "m-red", "m-hotpink"];
 
 each modifier in modifiers
-  .b-simple_error(class=modifier) Please choose shade
+  .b-simple_error(class=modifier) {lorem}
 ```
 
 ## Mixin
@@ -52,4 +52,7 @@ mixin article(title='Default Title', p='Text')
 
 +article('Hello world', 'Example of text')
 +article('Example of text', 'Hello world')
++article('Example of text', 'Hello world')
++article('Example of text', 'Hello world')
++article('{lorem}', '{lorem}')
 ```
