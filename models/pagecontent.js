@@ -4,7 +4,21 @@ const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
 const mustache = require('mustache');
+const c = require('ansi-colors');
+const pug = require('pug');
+const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 const renderer = new marked.Renderer();
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4
+  }
+});
 
 marked.setOptions({
     renderer: renderer,
@@ -22,7 +36,8 @@ const getFile = fileURL => fs.readFileSync(path.join(__dirname, fileURL), 'utf8'
 const elements = {
     'heading': getFile(markdownTemplates + 'heading.mustache'),
     'example': getFile(markdownTemplates + 'example.mustache'),
-    'exampleArray': getFile(markdownTemplates + 'example-array.mustache'),
+    'examplePug': getFile(markdownTemplates + 'examplePug.mustache'),
+    'exampleArray': getFile(markdownTemplates + 'exampleArray.mustache'),
     'code': getFile(markdownTemplates + 'code.mustache'),
     'hr': getFile(markdownTemplates + 'hr.mustache'),
     'paragraph': getFile(markdownTemplates + 'paragraph.mustache'),
@@ -67,8 +82,7 @@ function getCommentContent(filePath) {
             content: strippedContent
         };
     } else {
-        const colorizeYellow = str => '\x1b[33m' + str + '\x1b[0m';
-        console.warn(colorizeYellow('Warn: ') + 'Atlas: Content for import not found in ' + filePath);
+        // console.warn(c.yellow('Warn: ') + 'Atlas: Content for import not found in ' + filePath);
 
         return {
             content: ''
@@ -149,6 +163,21 @@ function mdImport(fileURL, options) {
             return exampleMarkupArray;
         } else if(language === 'html_example') {
             return exampleMarkup;
+        } else if(language === 'pug_example') {
+            let pugFn = pug.compile(code, {pretty: true});
+            let pugCompiled = pugFn().trim();
+
+            const re = new RegExp('{lorem', 'i');
+            while(re.test(pugCompiled)) {
+                pugCompiled = pugCompiled.replace('{lorem}', lorem.generateSentences(1));
+                pugCompiled = pugCompiled.replace('{loremWord}', lorem.generateWords(1));
+            }
+
+            return mustache.render(elements.examplePug, {
+                pug: code,
+                code: pugCompiled,
+                title: options.title + '-code-' + codeItemCount
+            });
         } else {
             return regularMarkup
         }

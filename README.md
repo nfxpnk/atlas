@@ -1,21 +1,11 @@
 # Atlas-guide
 
-[![Coverage Status](https://coveralls.io/repos/github/dimanech/atlas-guide/badge.svg?branch=master)](https://coveralls.io/github/dimanech/atlas-guide?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f37cf365f3315cfc287c/maintainability)](https://codeclimate.com/github/dimanech/atlas-guide/maintainability)
-[![Actions Status](https://github.com/dimanech/atlas-guide/workflows/tests-master/badge.svg)](https://github.com/dimanech/atlas-guide/actions)
-[![Greenkeeper badge](https://badges.greenkeeper.io/dimanech/atlas-guide.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/dimanech/atlas-guide/badge.svg?targetFile=package.json)](https://snyk.io/test/github/dimanech/atlas-guide?targetFile=package.json)
-[![npm version](https://badge.fury.io/js/atlas-guide.svg)](https://badge.fury.io/js/atlas-guide)
-
 Atlas is living style-guide, pattern library, guidelines and documentation static site generator with extensive styles monitoring and Sass components reports. It generates documentation from markdown files and documentation comment in `scss` files.
 
 It is opinionated. Because it is, probably, impossible to cover all cases in CSS/Sass.
 It designed primarily as "style-guide driven development" tool with focus on splited files approach and incapsulated components with normative Sass imports structure.
 
-* [Live example](https://dimanech.github.io/atlas-guide/)
-* [Video example](https://youtu.be/Vohb_Xl6S54)
-
-![atlas-component](docs/screens/atlas-component.jpeg)
+* [Live example](https://nfxpnk.github.io/atlas/)
 
 ## Features
 
@@ -283,7 +273,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
     "excludedCssFiles": "dev_",
     "excludedSassFiles": "dev_",
     "excludedDirs": "dev_",
-    "copyInternalAssets": true,
     "createDestFolder": false,
     "indexPageSource": "project-root/path/to/file.md",
     "templates": {
@@ -335,7 +324,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
 * `excludedCssFiles` {regexp} – CSS files that would not be processed in statistical reports.
 * `excludedSassFiles` {regexp} – Sass files that would not be processed in statistical reports.
 * `excludedDirs` {regexp} – directories that will be excluded from doc sets.
-* `copyInternalAssets` {bool} – copy internal Atlas assets (CSS and JS) to generated folder on each start. This would be usefull if you use completly custom style for guide and support it separatly.
 * `createDestFolder` {bool} - create destination directory if it is not exist. Default if `false`.
 * `indexPageSource` {string} - path to custom markdown file that will be used in index.html. Otherwise atlas try to find README.md in guide src and in the root of the project.
 * `templates`– use this field to use your own templates for guide generation.
