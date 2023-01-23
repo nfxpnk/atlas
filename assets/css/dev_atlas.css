@@ -952,4 +952,51 @@ body {
 .atlas-copier:hover .atlas-copier__text {
 	color: hsl(213deg, 75%, 54%);
 }
+
+/* TODO: Temp location, move to file.scss */
+.atlas-html {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid grey;
+}
+.atlas-html__item {
+	margin-bottom: 20px;
+}
+.atlas-html__item h2 {
+	margin-bottom: 10px;
+}
+.atlas-html__item:last-child {
+	margin: 0;
+}
+
+.atlas-markup {
+	position: relative;
+	outline: none !important;
+}
+.atlas-markup:focus {
+	outline: none !important;
+}
+.atlas-markup summary {
+	border: 1px solid grey;
+	cursor: pointer;
+	padding-left: 10px;
+}
+.atlas-markup summary:focus {
+	outline: none !important;
+}
+
+.atlas-markup__copy-button {
+	-webkit-appearance: none;
+	        appearance: none;
+	background-color: transparent;
+	border: none;
+	color: hsl(0deg, 0%, 80%);
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+.atlas-markup__copy-button:hover {
+	color: hsl(0deg, 0%, 100%);
+}
 /*# sourceMappingURL=dev_atlas.css.map */
