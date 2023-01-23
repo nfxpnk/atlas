@@ -9,7 +9,10 @@ const fillTemplatesConfig = (templatesConfig, internalTemplatesPath, name) => {
     let templates = {};
 
     fs.readdirSync(path.join(__dirname, internalTemplatesPath)).forEach(item => {
-        templates[path.basename(item, '.mustache')] = '';
+        // Exclude all other files
+        if(path.extname(item) === '.mustache') {
+            templates[path.basename(item, '.mustache')] = '';
+        }
     });
 
     Object.keys(templates).forEach(template => {
