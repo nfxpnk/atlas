@@ -57,6 +57,7 @@
 		border: 1px solid grey;
 		cursor: pointer;
 		padding-left: 10px;
+		user-select: none;
 
 		&:focus {
 			outline: none !important;
