@@ -31,10 +31,8 @@ block content
 ## Foreach pug example
 
 ```pug_example
-- var modifiers = ["m-green", "m-orange", "m-blue", "m-red", "m-hotpink"];
-
-each modifier in modifiers
-  .b-simple_error(class=modifier) {lorem}
+each modifier in ['m-green', 'm-orange', 'm-blue', 'm-red', 'm-hotpink', 'm-magenta']
+  .b-simple_error(class=modifier) {lorem} {lorem}
 ```
 
 ## Mixin
