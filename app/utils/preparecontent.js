@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 
 module.exports = function(atlasConfig, projectTree) {
@@ -25,6 +26,14 @@ module.exports = function(atlasConfig, projectTree) {
         switch (component.type) {
             case 'styleguide':
                 content = styleguide(projectConstants);
+                break;
+            case 'icons':
+                const iconsJson = path.join(atlasConfig.guideDest, 'icons.json');
+                let icons = {};
+                if(fs.existsSync(iconsJson)) {
+                    icons = require(iconsJson);
+                }
+                content = icons;
                 break;
             case 'component':
             case 'container':
