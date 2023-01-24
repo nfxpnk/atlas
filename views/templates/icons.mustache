@@ -26,12 +26,11 @@
 
 <style>
 .b-icons_example {
-    font-family: arial;
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-
+    align-items: stretch;
 }
 
 .b-icons_example-item {
@@ -46,21 +45,84 @@
     margin: 0 auto 10px;
     background: #dfdfdf;
 }
+.b-icons_section {
+
+}
+.b-icons_section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 </style>
-<section>
-    <ul class="b-icons_example">
-        {{#content.documentation}}
-        <li class="b-icons_example-item">
-            <svg width="{{width}}" height="{{height}}">
-                {{{paths}}}
-            </svg>
-            <p>
-                ${{name}}<br />
-                {{width}}px * {{height}}px
-            </p>
-        </li>
-        {{/content.documentation}}
-    </ul>
+<section class="b-icons_section">
+    <h2>Logos</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.0}}
+            {{> icons-group}}
+        {{/content.documentation.0}}
+    </div>
+
+    <h2>Globals</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.1}}
+            {{> icons-group}}
+        {{/content.documentation.1}}
+    </div>
+
+    <h2>Header</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.2}}
+            {{> icons-group}}
+        {{/content.documentation.2}}
+    </div>
+
+    <h2>Header small</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.3}}
+            {{> icons-group}}
+        {{/content.documentation.3}}
+    </div>
+
+<!--     <h2>4</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.4}}
+            {{> icons-group}}
+        {{/content.documentation.4}}
+    </div> -->
+
+    <h2>Social</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.5}}
+            {{> icons-group}}
+        {{/content.documentation.5}}
+    </div>
+
+<!--     <h2>6</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.6}}
+            {{> icons-group}}
+        {{/content.documentation.6}}
+    </div> -->
+
+    <h2>Shopping cart pages</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.7}}
+            {{> icons-group}}
+        {{/content.documentation.7}}
+    </div>
+
+    <h2>Checkout pages</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.8}}
+            {{> icons-group}}
+        {{/content.documentation.8}}
+    </div>
+
+    <h2>Other</h2>
+    <div class="b-icons_example">
+        {{#content.documentation.9}}
+            {{> icons-group}}
+        {{/content.documentation.9}}
+    </div>
 </section>
 
 {{> footer}}
