@@ -1,9 +1,13 @@
-<div class="b-icons_example-item">
+<div
+    class="b-icons_example-item"
+    onclick="document.getElementById('isml').innerText='{{ismlName}}';"
+    >
     <svg width="{{width}}" height="{{height}}">
         {{{paths}}}
     </svg>
     <p>
-        ${{name}}<br />
-        {{width}}px * {{height}}px
+        ${{name}}<br>
+        {{width}}px * {{height}}px<br>
+        {{type}}
     </p>
 </div>
