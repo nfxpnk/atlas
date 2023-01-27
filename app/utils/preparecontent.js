@@ -10,6 +10,7 @@ module.exports = function(atlasConfig, projectTree) {
 
     // View models
     const styleguide = require(path.resolve(__dirname, '../../viewmodels/styleguide.js'));
+    const colors = require(path.resolve(__dirname, '../../viewmodels/colors.js'));
 
     // Prepare guide page content model depending on component type
     function prepareContent(component) {
@@ -26,6 +27,9 @@ module.exports = function(atlasConfig, projectTree) {
         switch (component.type) {
             case 'styleguide':
                 content = styleguide(projectConstants);
+                break;
+            case 'colors':
+                content = colors(atlasConfig);
                 break;
             case 'icons':
                 const iconsJson = path.join(atlasConfig.guideSrc, 'icons.json');

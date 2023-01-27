@@ -6,6 +6,17 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
     additionalPages.unshift({
+        id: 'colors',
+        title: 'Colors',
+        src: indexSrc,
+        target: path.join(dest, '/colors.html'),
+        template: 'colors',
+        type: 'colors',
+        isDeprecated: false,
+        subPages: []
+    });
+
+    additionalPages.unshift({
         id: 'icons',
         title: 'Icons',
         src: indexSrc,
