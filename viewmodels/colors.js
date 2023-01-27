@@ -111,7 +111,9 @@ module.exports = function(config) {
         if (line.match(/^'/)) {
             const data = line.split(':');
             let value = data[1].trim();
-            value = trimLeftRight(value, 0, 1);
+            if(value.substr(value.length - 1) === ',') {
+                value = trimLeftRight(value, 0, 1);
+            }
             let variable;
             let color;
             let scssVariable = scssVariablesArray[value];
