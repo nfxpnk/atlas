@@ -11,7 +11,7 @@ module.exports = function(config) {
     }
 
     // Path to _colors.scss file with all scss variables
-    const colorsFile = 'H:/projects/bluerabbit/code/cartridges/app_custom_core/cartridge/client/default/scss/00-configuration/_colors.scss';
+    const colorsFile = config.guideDest + '00-configuration/_colors.scss';
     const scssData = fs.readFileSync(colorsFile, 'utf8');
 
     // Break down scss data into lines
