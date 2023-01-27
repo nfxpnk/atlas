@@ -1,0 +1,122 @@
+{{> header}}
+
+<div class="atlas-stat-sizes-page-title">
+    <div class="atlas-overline">
+        <svg width="16" height="16" role="img">
+            <use xlink:href="#icon-colors"></use>
+        </svg>
+        Colors
+    </div>
+    <div class="atlas-section">
+        <h1 class="atlas atlas-title atlas-title_1">
+            <span class="atlas-title__text">
+                {{projectInfo.name}}
+            </span>
+        </h1>
+    </div>
+</div>
+
+<section class="atlas-section">
+<span class="atlas-anchor" id="h1-icons"></span>
+<h1 class="atlas atlas-title atlas-title_1">
+    <span class="atlas-title__text">
+        Palette
+    </span>
+</h1>
+<style>
+.atlas-colors {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.atlas-colors__item {
+  width: 20%;
+  margin-bottom: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.atlas-color {
+  background: white;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0;
+}
+.atlas-color__figure {
+  position: relative;
+  background-image: linear-gradient(45deg, #f1f1f1 25%, transparent 25%, transparent 75%, #f1f1f1 75%, #f1f1f1), linear-gradient(45deg, #f1f1f1 25%, transparent 25%, transparent 75%, #f1f1f1 75%, #f1f1f1);
+  background-position: 0 0, 6px 6px;
+  background-size: 12px 12px;
+  height: 3em;
+}
+.atlas-color__figure-color {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.atlas-color__caption {
+  padding: 0.5em;
+}
+.atlas-color__name {
+  display: block;
+  font-weight: bold;
+  color: black;
+}
+.atlas-color__code {
+  display: block;
+  color: black;
+}
+</style>
+<section>
+
+
+
+{{#content.documentation.colorPalettes}}
+<h2>{{ name }}</h2>
+<div class="atlas-colors">
+	{{#variables}}
+	<div class="atlas-colors__item">
+		<figure class="atlas-color">
+			<div class="atlas-color__figure">
+				<span class="atlas-color__figure-color" style="background:{{value}}"></span>
+			</div>
+			<figcaption class="atlas-color__caption">
+				<strong class="atlas-color__name">{{name}}</strong>
+				<code class="atlas-color__code">{{value}}</code>
+			</figcaption>
+		</figure>
+	</div>
+	{{/variables}}
+</div>
+{{/content.documentation.colorPalettes}}
+
+{{#content.documentation.themes}}
+<h2 style="font-size: 30px;">{{ name }}</h2>
+	{{#sections}}
+	<h3>{{ name }}</h3>
+	<div class="atlas-colors">
+		{{#properties}}
+		<div class="atlas-colors__item">
+				<figure class="atlas-color">
+					<div class="atlas-color__figure">
+						<span class="atlas-color__figure-color" style="background:{{ value }}"></span>
+					</div>
+					<figcaption class="atlas-color__caption">
+						<strong class="atlas-color__name">{{name}}</strong>
+						<code class="atlas-color__code">{{scssVariable}}</code>
+						<code class="atlas-color__code">{{value}}</code>
+					</figcaption>
+				</figure>
+			</div>
+		{{/properties}}
+	</div>
+	{{/sections}}
+{{/content.documentation.themes}}
+
+</section>
+{{> footer}}
