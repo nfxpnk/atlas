@@ -11,7 +11,7 @@ module.exports = function(config) {
     }
 
     // Path to _colors.scss file with all scss variables
-    const colorsFile = config.guideDest + '00-configuration/_colors.scss';
+    const colorsFile = config.guideSrc + '00-configuration/_colors.scss';
     const scssData = fs.readFileSync(colorsFile, 'utf8');
 
     // Break down scss data into lines
