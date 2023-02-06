@@ -9,7 +9,7 @@ module.exports = function(atlasConfig, projectTree) {
     const renderedPageContent = require(path.resolve(__dirname, '../../models/pagecontent.js'));
 
     // View models
-    const styleguide = require(path.resolve(__dirname, '../../viewmodels/styleguide.js'));
+    //const styleguide = require(path.resolve(__dirname, '../../viewmodels/styleguide.js'));
     const colors = require(path.resolve(__dirname, '../../viewmodels/colors.js'));
 
     // Prepare guide page content model depending on component type
@@ -25,9 +25,9 @@ module.exports = function(atlasConfig, projectTree) {
             tableOfContent = page.toc;
         }
         switch (component.type) {
-            case 'styleguide':
-                content = styleguide(projectConstants);
-                break;
+            // case 'styleguide':
+            //     content = styleguide(projectConstants);
+            //     break;
             case 'colors':
                 content = colors(atlasConfig);
                 break;

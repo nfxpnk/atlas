@@ -38,18 +38,18 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         subPages: []
     });
 
-    if (constants.isDefined) {
-        additionalPages.unshift({
-            id: 'styleguide',
-            title: 'Styleguide',
-            src: '',
-            target: path.join(dest, '/styleguide.html'),
-            template: 'styleguide',
-            type: 'styleguide',
-            isDeprecated: false,
-            subPages: []
-        });
-    }
+    // if (constants.isDefined) {
+    //     additionalPages.unshift({
+    //         id: 'styleguide',
+    //         title: 'Styleguide',
+    //         src: '',
+    //         target: path.join(dest, '/styleguide.html'),
+    //         template: 'styleguide',
+    //         type: 'styleguide',
+    //         isDeprecated: false,
+    //         subPages: []
+    //     });
+    // }
 
     return additionalPages;
 }

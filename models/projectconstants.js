@@ -113,12 +113,12 @@ function getProjectConstants(constConfig, additionalSassImports) {
     const constRegexpsList = constConfig.constantsList;
     const constFileString = constConfig.constantsFile;
     const imports = additionalSassImports || [];
-    constConfig.constantsSrc.forEach(item => imports.push(path.dirname(item)));// in case if file itself contain imports
+    //constConfig.constantsSrc.forEach(item => imports.push(path.dirname(item)));// in case if file itself contain imports
 
-    const compiledConstants = compileStyles(prepareConstantsData(constFileString, constRegexpsList), imports);
-    const compiledConstantsAST = postcss().process(compiledConstants, { stringifier: {} }).root;
+    //const compiledConstants = compileStyles(prepareConstantsData(constFileString, constRegexpsList), imports);
+    //const compiledConstantsAST = postcss().process(compiledConstants, { stringifier: {} }).root;
 
-    return getConstants(compiledConstantsAST, constRegexpsList);
+    //return getConstants(compiledConstantsAST, constRegexpsList);
 }
 
 module.exports = getProjectConstants;

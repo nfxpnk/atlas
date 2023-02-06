@@ -93,7 +93,8 @@ function getDeclaredConstants(config) {
     }
 
     try {
-        settingsFilesData = prepareSCSSConstantsFiles(config.projectConstants.constantsSrc);
+        //settingsFilesData = prepareSCSSConstantsFiles(config.projectConstants.constantsSrc);
+        settingsFilesData = {};
     } catch (e) {
         printMessage('warn', '"projectConstants" is declared, but constants file not found (' + e +
             '). Constants could not be fetched.');
