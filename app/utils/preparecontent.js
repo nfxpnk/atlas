@@ -24,12 +24,18 @@ module.exports = function(atlasConfig, projectTree) {
             content = page.content;
             tableOfContent = page.toc;
         }
+
         switch (component.type) {
             // case 'styleguide':
             //     content = styleguide(projectConstants);
             //     break;
             case 'colors':
-                content = colors(atlasConfig);
+            case 'colors-1':
+            case 'colors-2':
+            case 'colors-3':
+            case 'colors-4':
+            case 'colors-5':
+                content = colors(atlasConfig, component.id);
                 break;
             case 'icons':
                 const iconsJson = path.join(atlasConfig.guideSrc, 'icons.json');
