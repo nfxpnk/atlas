@@ -46,7 +46,7 @@ module.exports = function init(atlasConfig, subPages) {
             (resolve, reject) => fs.writeFile(
                 config.target,
                 mustache.render(
-                    getCachedTemplates(config.template),
+                    getCachedTemplates(config.type),
                     view(config),
                     cachedPartials
                 ),
