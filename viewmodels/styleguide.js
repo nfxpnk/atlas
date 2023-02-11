@@ -2,7 +2,7 @@
 
 module.exports = function(constants) {
     let constantsList = {
-        'color': constants.color,
+        //'color': constants.color,
         'font': constants.font,
         'scale': constants.scale,
         'space': constants.space,
