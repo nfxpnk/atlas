@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-module.exports = function(config) {
+module.exports = function(config, id) {
     // Trim string from left and right
     function trimLeftRight(string, left, right) {
         string = string.substring(left);
@@ -149,5 +149,5 @@ module.exports = function(config) {
     //     }
     // ]
 
-    return { colorPalettes: colorPalettes, themes: themes };
+    return { id: id, colorPalettes: colorPalettes, themes: themes };
 };
