@@ -5,36 +5,31 @@ const path = require('path');
 function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
+    const themes = [];
+    for (const theme of [1,2,3,4,5]) {
+        themes.push(
+            {
+                id: 'colors-theme-' + theme,
+                title: 'Theme #' + theme,
+                src: indexSrc,
+                target: path.join(dest, '/colors-theme-' + theme + '.html'),
+                type: 'colors',
+                icon: 'about',
+                isDeprecated: false,
+                subPages: []
+            }
+        );
+    }
+
     additionalPages.unshift({
         id: 'colors',
         title: 'Colors',
         src: indexSrc,
         target: path.join(dest, '/colors.html'),
-        template: 'colors',
         type: 'colors',
+        icon: 'colors',
         isDeprecated: false,
-        subPages: [
-            {
-                id: 'colors-theme-1',
-                title: 'Theme #1',
-                src: indexSrc,
-                target: path.join(dest, '/colors-theme-1.html'),
-                template: 'colors',
-                type: 'colors',
-                isDeprecated: false,
-                subPages: []
-            },
-            {
-                id: 'colors-theme-2',
-                title: 'Theme #2',
-                src: indexSrc,
-                target: path.join(dest, '/colors-theme-2.html'),
-                template: 'colors',
-                type: 'colors',
-                isDeprecated: false,
-                subPages: []
-            }
-        ]
+        subPages: themes
     });
 
     additionalPages.unshift({
@@ -42,8 +37,8 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         title: 'Icons',
         src: indexSrc,
         target: path.join(dest, '/icons.html'),
-        template: 'icons',
         type: 'icons',
+        icon: 'icons',
         isDeprecated: false,
         subPages: []
     });
@@ -53,8 +48,8 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         title: 'About',
         src: indexSrc,
         target: path.join(dest, '/index.html'),
-        template: 'about',
         type: 'about',
+        icon: 'about',
         isDeprecated: false,
         subPages: []
     });
@@ -67,6 +62,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     //         target: path.join(dest, '/styleguide.html'),
     //         template: 'styleguide',
     //         type: 'styleguide',
+    //         icon: 'styleguide',
     //         isDeprecated: false,
     //         subPages: []
     //     });

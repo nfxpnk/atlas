@@ -5,8 +5,6 @@ const log = require('fancy-log');
 const c = require('ansi-colors');
 
 function withConfig(configPath) {
-    console.log(configPath);
-
     // Prepare config and basic models
     const atlasConfig = require(path.resolve(__dirname, '../models/atlasconfig.js'))(configPath);
 

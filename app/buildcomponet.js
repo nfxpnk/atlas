@@ -43,8 +43,9 @@ module.exports = function(atlasConfig, projectTree, writePage) {
                             id: component.id,
                             title: component.title,
                             target: component.target,
-                            template: component.type,
+                            //template: component.template,
                             type: component.type,
+                            icon: component.icon,
                             isDeprecated: component.isDeprecated,
                             content: content
                         });
