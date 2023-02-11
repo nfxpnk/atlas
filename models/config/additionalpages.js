@@ -13,7 +13,28 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         template: 'colors',
         type: 'colors',
         isDeprecated: false,
-        subPages: []
+        subPages: [
+            {
+                id: 'colors-theme-1',
+                title: 'Theme #1',
+                src: indexSrc,
+                target: path.join(dest, '/colors-theme-1.html'),
+                template: 'colors',
+                type: 'colors',
+                isDeprecated: false,
+                subPages: []
+            },
+            {
+                id: 'colors-theme-2',
+                title: 'Theme #2',
+                src: indexSrc,
+                target: path.join(dest, '/colors-theme-2.html'),
+                template: 'colors',
+                type: 'colors',
+                isDeprecated: false,
+                subPages: []
+            }
+        ]
     });
 
     additionalPages.unshift({
