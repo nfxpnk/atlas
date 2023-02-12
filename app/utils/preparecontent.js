@@ -35,7 +35,7 @@ module.exports = function(atlasConfig, projectTree) {
             case 'colors-3':
             case 'colors-4':
             case 'colors-5':
-                content = colors(atlasConfig, component.id);
+                content = colors(atlasConfig, component);
                 break;
             case 'icons':
                 const iconsJson = path.join(atlasConfig.guideSrc, 'icons.json');

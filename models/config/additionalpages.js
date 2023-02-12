@@ -6,7 +6,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
     let additionalPages = [];
 
     const themes = [];
-    for (const theme of [1,2,3,4,5]) {
+    for (const theme of [1,2]) {
         themes.push(
             {
                 id: 'colors-theme-' + theme,

@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 
-module.exports = function(config, id) {
+module.exports = function(config, component) {
+    const id = component.cid;
+
     // Path to _colors.scss file with all scss variables
     const colorsFile = config.guideSrc + '00-configuration/_colors.scss';
 
@@ -126,7 +128,7 @@ module.exports = function(config, id) {
         if (line.startsWith('$color-')) {
             const data = line.split(':');
             let hex = data[1].slice(1);
-            if(hex.substr(hex.length - 1) === ',') {
+            if(hex.substr(hex.length - 1) === ';') {
                 hex = hex.slice(0, -1);
             }
             scssVariablesArray[data[0]] = hex;
@@ -204,5 +206,5 @@ module.exports = function(config, id) {
     //console.log(cssSection);
     //console.log(JSON.stringify(cssVariables,null,4));
 
-    return { id: id, themeColorGroups: themeColorGroups, colorSections: colorSections, cssVariables: cssVariables };
+    return { component: component, themeColorGroups: themeColorGroups, colorSections: colorSections, cssVariables: cssVariables };
 };
