@@ -3,6 +3,14 @@
 const fs = require('fs');
 
 module.exports = function(config, component) {
+    function hexToRgb(hex) {
+        let r = parseInt(hex.substring(1, 3), 16);
+        let g = parseInt(hex.substring(3, 5), 16);
+        let b = parseInt(hex.substring(5, 7), 16);
+
+        return r + ',' + g + ',' + b;
+    }
+
     const id = component.cid;
 
     // Path to _colors.scss file with all scss variables
@@ -26,8 +34,7 @@ module.exports = function(config, component) {
     let themeColorGroups = [];
 
     // Object with group data
-    let themeColorGroup = {};
-    themeColorGroup.variables = [];
+    let themeColorGroup = {variables: []};
 
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
@@ -39,8 +46,7 @@ module.exports = function(config, component) {
         if (line.startsWith('// #' + id)) {
             if(currentVariable) {
                 themeColorGroups.push(themeColorGroup);
-                themeColorGroup = {};
-                themeColorGroup.variables = [];
+                themeColorGroup = {variables: []};
             }
             const data = line.split(':');
             themeColorGroup.originalComment = data[0];
@@ -60,16 +66,15 @@ module.exports = function(config, component) {
         }
 
         if (currentVariable && line.match(/^\d/)) {
-            const data = line.split(':');
-            let variableName = currentVariable + '-' + data[0];
+            let [key, hex] = line.split(':').map(part => part.trim());
+            let variableName = currentVariable + '-' + key;
 
-            let hex = data[1].slice(1);
-            if(hex.substr(hex.length - 1) === ',') {
+            if(hex.endsWith(',')) {
                 hex = hex.slice(0, -1);
             }
 
             scssVariablesArray[variableName] = hex;
-            themeColorGroup.variables.push({name: variableName, key: data[0], hex: hex});
+            themeColorGroup.variables.push({name: variableName, key: key, hex: hex});
         }
 
         if(line.startsWith('// #end ' + id)) {
@@ -84,8 +89,7 @@ module.exports = function(config, component) {
 
     // Object with color section {name: sectionName, properties: [array {cssVariables}]}
     let colorsCollection = {};
-    colorsCollection = {};
-    colorsCollection.values = [];
+    colorsCollection = {values: []};
 
     // Color sections array with objects {colorsCollection}
     let colorSections = [];
@@ -115,21 +119,29 @@ module.exports = function(config, component) {
         if (line.startsWith('// #')) {
             if (colorsCollection.values.length > 0) {
                 colorSections.push(colorsCollection);
-                colorsCollection = {};
-                colorsCollection.values = [];
+                colorsCollection = {values: []};
             }
 
             colorsCollection.name = line.slice(4);
         }
 
         if (line.startsWith('$color-')) {
-            const data = line.split(':');
-            let hex = data[1].slice(1);
-            if(hex.substr(hex.length - 1) === ';') {
+            let [name, hex] = line.split(':').map(part => part.trim());
+
+            if(hex.endsWith(';')) {
                 hex = hex.slice(0, -1);
             }
-            scssVariablesArray[data[0]] = hex;
-            colorsCollection.values.push({name: data[0], hex: hex});
+
+            if(hex.startsWith('rgb')) {
+                let scssVar1 = hex.match(/(\$color(.+?)),/);
+                let scssVar = scssVariablesArray[scssVar1[1]];
+                //console.log('NOFX1',scssVar,scssVariablesArray, hexToRgb(scssVar));
+                hex = hex.replace(scssVar1[0], hexToRgb(scssVar)+',');
+                //console.log(hex);
+            }
+
+            scssVariablesArray[name] = hex;
+            colorsCollection.values.push({name: name, hex: hex});
         }
     }
 
@@ -137,9 +149,7 @@ module.exports = function(config, component) {
     // console.log(JSON.stringify(colorSections, null, 4));
     // console.log(scssVariablesArray);
 
-
-    let cssSection = {};
-    cssSection.values = [];
+    let cssSection = {values:[]};
 
     // Array of color objects {name:'', scssVariable: '', value:''}
     let cssVariables = [];
@@ -171,31 +181,36 @@ module.exports = function(config, component) {
         if (line.startsWith('// #')) {
             if (cssSection.values.length > 0) {
                 cssVariables.push(cssSection);
-                cssSection = {};
-                cssSection.values = [];
+                cssSection = {values: []};
             }
 
             cssSection.name = line.slice(4);
         }
 
         if (line.startsWith('\'')) {
-            const data = line.split(':');
-            let value = data[1].trim();
-            if(value.substr(value.length - 1) === ',') {
+            let [name, value] = line.split(':').map(part => part.trim());
+            if(value.endsWith(',')) {
                 value = value.slice(0, -1);
             }
-            let variable;
-            let color;
+            let variable = '';
+            let color = null;
             let scssVariable = scssVariablesArray[value];
-            if (typeof scssVariable == 'undefined') {
-                variable = '';
+            if (typeof scssVariable === 'undefined') {
                 color = value;
             } else {
                 variable = value;
                 color = scssVariable;
             }
-            let name = data[0].slice(1, -1);
-            cssSection.values.push({ name: name, scssVariable: variable, value: color });
+
+            if(color.startsWith('hextorgb')) {
+                let scssVar1 = color.match(/\((.+?)\)/);
+                let scssVar = scssVariablesArray[scssVar1[1]];
+                //console.log('NOFX1',scssVar,scssVariablesArray, hexToRgb(scssVar));
+                color = 'rgb(' +hexToRgb(scssVar) + ')';
+                //console.log(hex);
+            }
+
+            cssSection.values.push({ name: name.slice(1, -1), scssVariable: variable, value: color });
         }
     }
 
