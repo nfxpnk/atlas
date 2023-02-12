@@ -10,6 +10,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         themes.push(
             {
                 id: 'colors-theme-' + theme,
+                cid: '0' + theme,
                 title: 'Theme #' + theme,
                 src: indexSrc,
                 target: path.join(dest, '/colors-theme-' + theme + '.html'),
@@ -23,6 +24,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
 
     additionalPages.unshift({
         id: 'colors',
+        cid: '00',
         title: 'Colors',
         src: indexSrc,
         target: path.join(dest, '/colors.html'),

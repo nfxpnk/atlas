@@ -3,19 +3,13 @@
 const fs = require('fs');
 
 module.exports = function(config, id) {
-    // Trim string from left and right
-    function trimLeftRight(string, left, right) {
-        string = string.substring(left);
-        string = string.substring(0, string.length - right);
-        return string;
-    }
-
     // Path to _colors.scss file with all scss variables
     const colorsFile = config.guideSrc + '00-configuration/_colors.scss';
+
     const scssData = fs.readFileSync(colorsFile, 'utf8');
 
-    // Break down scss data into lines
-    const lines = scssData.split('\n');
+    // Break down scss data into lines and skip empty lines
+    const lines = scssData.split('\n').filter(line => line.trim() !== '');
 
     // Array with all scss variables [$color-var => #value]
     let scssVariablesArray = [];
@@ -23,96 +17,166 @@ module.exports = function(config, id) {
     // Array of color objects {name:'', value:''}
     let scssVariables = [];
 
-    // Object with color pallete section {name: sectionName, variables: [array {scssVariables}]}
-    let colorsCollection = {};
+    // Current processed varibale
+    let currentVariable = null;
 
-    // Final color palette array with objects {colorsCollection}
-    let colorPalettes = [];
+    // Arrays of object with main groups Primary and Secondary
+    let themeColorGroups = [];
+
+    // Object with group data
+    let themeColorGroup = {};
+    themeColorGroup.variables = [];
+    themeColorGroup.originalKeys = [];
 
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
-
         if (typeof line == 'undefined') {
             continue;
         }
-
         line = line.trim();
-        if (line.match(/^\/\/ #/)) {
-            if (scssVariables.length > 0) {
-                colorsCollection.variables = scssVariables;
-                colorPalettes.push(colorsCollection);
-                scssVariables = [];
-                colorsCollection = {};
-            }
 
-            colorsCollection.name = trimLeftRight(line, 4, 0);
+        if (line.startsWith('// #' + id)) {
+            if(currentVariable) {
+                themeColorGroups.push(themeColorGroup);
+                themeColorGroup = {};
+                themeColorGroup.variables = [];
+                themeColorGroup.originalKeys = [];
+            }
+            const data = line.split(':');
+            themeColorGroup.originalComment = data[0];
+            const name = data[0].slice(9);
+            const dataName = name.split(' - ');
+            themeColorGroup.name = dataName[1];
+            themeColorGroup.group = dataName[0];
         }
 
-        if (line.match(/^\$color/)) {
-            const data = line.split(':');
-            let value = data[1].trim();
-            value = trimLeftRight(value, 0, 1);
-            scssVariablesArray[data[0]] = value;
+        const idRegex = '-' + id;
+        const themeRegex = new RegExp('^(\\$color-(primary|secondary))' + idRegex);
+        const match = line.match(themeRegex);
+        if (match) {
+            currentVariable = match[1];
+            themeColorGroup.originalVariable = match[0];
+            themeColorGroup.variable = currentVariable;
+        }
 
-            if (value.match(/^\$color/)) {
-                value = scssVariablesArray[value];
-            }
-            scssVariables.push({ name: data[0], value: value });
+        if (currentVariable && line.match(/^\d/)) {
+            const data = line.split(':');
+            let variableName = currentVariable + '-' + data[0];
+
+            const hex = data[1].slice(1, -1);
+            scssVariablesArray[variableName] = hex;
+            themeColorGroup.variables.push({name: variableName, hex: hex});
+            themeColorGroup.originalKeys.push({name: data[0], hex: hex});
+        }
+
+        if(line.startsWith('// #end ' + id)) {
+            themeColorGroups.push(themeColorGroup);
+            break;
         }
     }
 
     // Debug section
-    // console.log(JSON.stringify(colorPalettes, null, 4));
-    // console.log(scssVariablesArray);
+    //console.log(JSON.stringify(themeColorGroups, null, 5));
 
-    // Final themes array with objects {themeCollection}
-    let themes = [];
-    let currentSection;
-
-    // Array of color objects {name:'', scssVariable: '', value:''}
-    let cssVariables = [];
 
     // Object with color section {name: sectionName, properties: [array {cssVariables}]}
+    let colorsCollection = {};
     colorsCollection = {};
+    colorsCollection.values = [];
 
     // Color sections array with objects {colorsCollection}
     let colorSections = [];
 
-    // Themes sections
-    let themesCollection = {};
-
+    let sharedColors = null;
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
         if (typeof line == 'undefined') {
             continue;
         }
 
+        if (line.startsWith('// Shared colors')) {
+            sharedColors = true;
+        }
+
+        if(sharedColors === null) {
+            continue;
+        }
+
+        if (line.startsWith('// eob Shared colors')) {
+            colorSections.push(colorsCollection);
+            break;
+        }
+
         line = line.trim();
-        if (line.match(/^\/\/ #/)) {
-            if (cssVariables.length > 0) {
-                colorsCollection.properties = cssVariables;
+
+        if (line.startsWith('// #')) {
+            if (colorsCollection.values.length > 0) {
                 colorSections.push(colorsCollection);
-                cssVariables = [];
                 colorsCollection = {};
+                colorsCollection.values = [];
             }
 
-            colorsCollection.name = trimLeftRight(line, 4, 0);
+            colorsCollection.name = line.slice(4);
         }
 
-        if (line.match(/^\$theme-/)) {
-            if (colorSections.length > 0) {
-                themesCollection.sections = colorSections;
-                themes.push(themesCollection);
-                colorSections = [];
-                themesCollection = {};
-            }
-            themesCollection.name = trimLeftRight(line, 1, 3);
+        if (line.startsWith('$color-')) {
+            const data = line.split(':');
+            const hex = data[1].slice(1, -1);
+            scssVariablesArray[data[0]] = hex;
+            colorsCollection.values.push({name: data[0], hex: hex});
         }
-        if (line.match(/^'/)) {
+    }
+
+    // Debug section
+    // console.log(JSON.stringify(colorSections, null, 4));
+    // console.log(scssVariablesArray);
+
+
+    let cssSection = {};
+    cssSection.values = [];
+
+    // Array of color objects {name:'', scssVariable: '', value:''}
+    let cssVariables = [];
+
+    let cssColors = null;
+
+    // CSS Properties
+    for (let i = 0; i <= lines.length; ++i) {
+        let line = lines[i];
+        if (typeof line == 'undefined') {
+            continue;
+        }
+
+        if (line.startsWith('// CSS properties')) {
+            cssColors = true;
+        }
+
+        if(cssColors === null) {
+            continue;
+        }
+
+        if (line.startsWith('// eob CSS properties')) {
+            cssVariables.push(cssSection);
+            break;
+        }
+
+        line = line.trim();
+
+        if (line.startsWith('// #')) {
+            if (cssSection.values.length > 0) {
+                cssVariables.push(cssSection);
+                cssSection = {};
+                cssSection.values = [];
+            }
+
+            cssSection.name = line.slice(4);
+        }
+
+        if (line.startsWith('\'')) {
             const data = line.split(':');
             let value = data[1].trim();
             if(value.substr(value.length - 1) === ',') {
-                value = trimLeftRight(value, 0, 1);
+                value = value.slice(0, -1);
             }
             let variable;
             let color;
@@ -124,30 +188,14 @@ module.exports = function(config, id) {
                 variable = value;
                 color = scssVariable;
             }
-            let name = trimLeftRight(data[0], 1, 1);
-            cssVariables.push({ name: name, scssVariable: variable, value: color });
+            let name = data[0].slice(1, -1);
+            cssSection.values.push({ name: name, scssVariable: variable, value: color });
         }
     }
 
     // Debug section
-    //console.log(JSON.stringify(colorSections, null, 4));
-    //console.log(JSON.stringify(themes, null, 4));
+    //console.log(cssSection);
+    //console.log(JSON.stringify(cssVariables,null,4));
 
-    // [
-    //     {
-    //         name: 'name',
-    //         sections: {
-    //             {
-    //                 name: 'Buttons',
-    //                 properties: {
-    //                     name:,
-    //                     variable:,
-    //                     value:,
-    //                 }
-    //             }
-    //         }
-    //     }
-    // ]
-
-    return { id: id, colorPalettes: colorPalettes, themes: themes };
+    return { id: id, themeColorGroups: themeColorGroups, colorSections: colorSections, cssVariables: cssVariables };
 };
