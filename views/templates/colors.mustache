@@ -1,27 +1,27 @@
 {{> header}}
 
 <div class="atlas-stat-sizes-page-title">
-    <div class="atlas-overline">
-        <svg width="16" height="16" role="img">
-            <use xlink:href="#icon-colors"></use>
-        </svg>
-        Colors
-    </div>
-    <div class="atlas-section">
-        <h1 class="atlas atlas-title atlas-title_1">
-            <span class="atlas-title__text">
-                {{projectInfo.name}}
-            </span>
-        </h1>
-    </div>
+	<div class="atlas-overline">
+		<svg width="16" height="16" role="img">
+			<use xlink:href="#icon-colors"></use>
+		</svg>
+		Colors
+	</div>
+	<div class="atlas-section">
+		<h1 class="atlas atlas-title atlas-title_1">
+			<span class="atlas-title__text">
+				{{projectInfo.name}}
+			</span>
+		</h1>
+	</div>
 </div>
 
 <section class="atlas-section">
 <span class="atlas-anchor" id="h1-icons"></span>
 <h1 class="atlas atlas-title atlas-title_1">
-    <span class="atlas-title__text">
-        Palette: {{ content.documentation.id }}
-    </span>
+	<span class="atlas-title__text">
+		Palette: {{ content.documentation.id }}
+	</span>
 </h1>
 <style>
 .atlas-colors {
@@ -84,7 +84,8 @@
 				<span class="atlas-color__figure-color" style="background:{{hex}}"></span>
 			</div>
 			<figcaption class="atlas-color__caption">
-				<strong class="atlas-color__name">{{name}}</strong>
+				<strong class="atlas-color__name">{{key}}</strong>
+				<code class="atlas-color__code">{{name}}</code>
 				<code class="atlas-color__code">{{hex}}</code>
 			</figcaption>
 		</figure>
@@ -96,19 +97,19 @@
 {{#content.documentation.colorSections}}
 <h2>{{ name }}</h2>
 <div class="atlas-colors">
-    {{#values}}
-    <div class="atlas-colors__item">
-        <figure class="atlas-color">
-            <div class="atlas-color__figure">
-                <span class="atlas-color__figure-color" style="background:{{hex}}"></span>
-            </div>
-            <figcaption class="atlas-color__caption">
-                <strong class="atlas-color__name">{{name}}</strong>
-                <code class="atlas-color__code">{{hex}}</code>
-            </figcaption>
-        </figure>
-    </div>
-    {{/values}}
+	{{#values}}
+	<div class="atlas-colors__item">
+		<figure class="atlas-color">
+			<div class="atlas-color__figure">
+				<span class="atlas-color__figure-color" style="background:{{hex}}"></span>
+			</div>
+			<figcaption class="atlas-color__caption">
+				<strong class="atlas-color__name">{{name}}</strong>
+				<code class="atlas-color__code">{{hex}}</code>
+			</figcaption>
+		</figure>
+	</div>
+	{{/values}}
 </div>
 {{/content.documentation.colorSections}}
 

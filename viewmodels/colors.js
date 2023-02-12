@@ -63,10 +63,14 @@ module.exports = function(config, id) {
             const data = line.split(':');
             let variableName = currentVariable + '-' + data[0];
 
-            const hex = data[1].slice(1, -1);
+            let hex = data[1].slice(1);
+            if(hex.substr(hex.length - 1) === ',') {
+                hex = hex.slice(0, -1);
+            }
+
             scssVariablesArray[variableName] = hex;
-            themeColorGroup.variables.push({name: variableName, hex: hex});
-            themeColorGroup.originalKeys.push({name: data[0], hex: hex});
+            themeColorGroup.variables.push({name: variableName, key: data[0], hex: hex});
+            themeColorGroup.originalKeys.push({key: data[0], hex: hex});
         }
 
         if(line.startsWith('// #end ' + id)) {
@@ -121,7 +125,10 @@ module.exports = function(config, id) {
 
         if (line.startsWith('$color-')) {
             const data = line.split(':');
-            const hex = data[1].slice(1, -1);
+            let hex = data[1].slice(1);
+            if(hex.substr(hex.length - 1) === ',') {
+                hex = hex.slice(0, -1);
+            }
             scssVariablesArray[data[0]] = hex;
             colorsCollection.values.push({name: data[0], hex: hex});
         }
