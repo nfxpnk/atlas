@@ -83,9 +83,9 @@ module.exports = function(config, component) {
         }
     }
 
+
     // Debug section
     //console.log(JSON.stringify(themeColorGroups, null, 5));
-
 
     // Object with color section {name: sectionName, properties: [array {cssVariables}]}
     let colorsCollection = {};
@@ -135,9 +135,7 @@ module.exports = function(config, component) {
             if(hex.startsWith('rgb')) {
                 let scssVar1 = hex.match(/(\$color(.+?)),/);
                 let scssVar = scssVariablesArray[scssVar1[1]];
-                //console.log('NOFX1',scssVar,scssVariablesArray, hexToRgb(scssVar));
                 hex = hex.replace(scssVar1[0], hexToRgb(scssVar)+',');
-                //console.log(hex);
             }
 
             scssVariablesArray[name] = hex;
@@ -205,9 +203,7 @@ module.exports = function(config, component) {
             if(color.startsWith('hextorgb')) {
                 let scssVar1 = color.match(/\((.+?)\)/);
                 let scssVar = scssVariablesArray[scssVar1[1]];
-                //console.log('NOFX1',scssVar,scssVariablesArray, hexToRgb(scssVar));
                 color = 'rgb(' +hexToRgb(scssVar) + ')';
-                //console.log(hex);
             }
 
             cssSection.values.push({ name: name.slice(1, -1), scssVariable: variable, value: color });
