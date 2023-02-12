@@ -83,7 +83,6 @@ module.exports = function(config, component) {
         }
     }
 
-
     // Debug section
     //console.log(JSON.stringify(themeColorGroups, null, 5));
 

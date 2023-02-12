@@ -1,0 +1,7 @@
+.atlas-theme-switcher {
+	display: flex;
+
+	.theme-radio + label {
+		color: var(--color-primary-800);
+	}
+}
