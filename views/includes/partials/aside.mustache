@@ -20,18 +20,32 @@
                     <a class="theme-switch" href="#" data-theme="microsite-5">theme-5</a>
                 </div>
 
-                <div style="margin-bottom: 20px;">
-                    <input type="radio" class="theme-radio" name="theme" id="nothing" value="nothing" checked>
-                    <label for="nothing">Default</label>
+                <style>
+                    .theme-radio + label {
+                        color: var(--color-primary-800);
+                    }
+                </style>
 
-                    <input type="radio" class="theme-radio" name="theme" id="microsite-1" value="microsite-1">
-                    <label for="microsite-1">theme-1</label>
+                <div style="margin-bottom: 20px; display: flex;">
+                    <div>
+                        <input type="radio" class="theme-radio" name="theme" id="nothing" value="nothing" checked>
+                        <label for="nothing">Default</label>
+                    </div>
 
-                    <input type="radio" class="theme-radio" name="theme" id="microsite-2" value="microsite-2">
-                    <label for="microsite-2">theme-2</label>
+                    <div class="microsite-1">
+                        <input type="radio" class="theme-radio" name="theme" id="microsite-1" value="microsite-1">
+                        <label for="microsite-1">theme-1</label>
+                    </div>
 
-                    <input type="radio" class="theme-radio" name="theme" id="microsite-3" value="microsite-3">
-                    <label for="microsite-3">theme-3</label>
+                    <div class="microsite-2">
+                        <input type="radio" class="theme-radio" name="theme" id="microsite-2" value="microsite-2">
+                        <label for="microsite-2">theme-2</label>
+                    </div>
+
+                    <div class="microsite-3">
+                        <input type="radio" class="theme-radio" name="theme" id="microsite-3" value="microsite-3">
+                        <label for="microsite-3">theme-3</label>
+                    </div>
                 </div>
 
                 <div class="atlas-header__search">
