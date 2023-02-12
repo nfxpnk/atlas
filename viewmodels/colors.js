@@ -28,7 +28,6 @@ module.exports = function(config, component) {
     // Object with group data
     let themeColorGroup = {};
     themeColorGroup.variables = [];
-    themeColorGroup.originalKeys = [];
 
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
@@ -42,7 +41,6 @@ module.exports = function(config, component) {
                 themeColorGroups.push(themeColorGroup);
                 themeColorGroup = {};
                 themeColorGroup.variables = [];
-                themeColorGroup.originalKeys = [];
             }
             const data = line.split(':');
             themeColorGroup.originalComment = data[0];
@@ -72,7 +70,6 @@ module.exports = function(config, component) {
 
             scssVariablesArray[variableName] = hex;
             themeColorGroup.variables.push({name: variableName, key: data[0], hex: hex});
-            themeColorGroup.originalKeys.push({key: data[0], hex: hex});
         }
 
         if(line.startsWith('// #end ' + id)) {

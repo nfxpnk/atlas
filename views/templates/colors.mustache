@@ -74,6 +74,17 @@
 </style>
 <section>
 
+
+<div class="atlas atlas-code scss">
+<pre><code class="language-scss">{{#content.documentation.themeColorGroups}}{{originalVariable}}: (
+{{#variables}}
+	{{key}}: {{hex}},
+{{/variables}}
+);
+{{/content.documentation.themeColorGroups}}
+</code></pre>
+</div>
+
 {{#content.documentation.themeColorGroups}}
 <h2>{{ name }} - {{ group }}</h2>
 <div class="atlas-colors">
