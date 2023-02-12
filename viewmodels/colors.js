@@ -4,11 +4,11 @@ const fs = require('fs');
 
 module.exports = function(config, component) {
     function hexToRgb(hex) {
-        let r = parseInt(hex.substring(1, 3), 16);
-        let g = parseInt(hex.substring(3, 5), 16);
-        let b = parseInt(hex.substring(5, 7), 16);
+        let rgb = parseInt(hex.substring(1, 3), 16) + ',';
+        rgb += parseInt(hex.substring(3, 5), 16) + ',';
+        rgb += parseInt(hex.substring(5, 7), 16);
 
-        return r + ',' + g + ',' + b;
+        return rgb;
     }
 
     const id = component.cid;
