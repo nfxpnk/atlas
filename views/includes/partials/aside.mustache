@@ -10,39 +10,25 @@
                 <div class="atlas-header__logo" role="banner">
                     {{>logo}}
                 </div>
-                <div style="display: none;">
-                    Theme:
-                    <a class="theme-switch" href="#" data-theme="nothing">theme-default</a>
-                    <a class="theme-switch" href="#" data-theme="microsite-1">theme-1</a>
-                    <a class="theme-switch" href="#" data-theme="microsite-2">theme-2</a>
-                    <a class="theme-switch" href="#" data-theme="microsite-3">theme-3</a>
-                    <a class="theme-switch" href="#" data-theme="microsite-4">theme-4</a>
-                    <a class="theme-switch" href="#" data-theme="microsite-5">theme-5</a>
-                </div>
-
-                <style>
-
-                </style>
-
-                <div class="atlas-theme-switcher" style="margin-bottom: 20px; display: flex;">
-                    <div>
-                        <input type="radio" class="theme-radio" name="theme" id="nothing" value="nothing" checked>
+                <div class="atlas-theme-switcher">
+                    <div class="atlas-theme-switcher__switch">
+                        <input type="radio" class="atlas-theme-switcher__radio" name="theme" id="nothing" value="nothing" checked>
                         <label for="nothing">Default</label>
                     </div>
 
-                    <div class="microsite-1">
-                        <input type="radio" class="theme-radio" name="theme" id="microsite-1" value="microsite-1">
-                        <label for="microsite-1">theme-1</label>
+                    <div class="microsite-1 atlas-theme-switcher__switch">
+                        <input type="radio" class="atlas-theme-switcher__radio" name="theme" id="microsite-1" value="microsite-1">
+                        <label for="microsite-1">01</label>
                     </div>
 
-                    <div class="microsite-2">
-                        <input type="radio" class="theme-radio" name="theme" id="microsite-2" value="microsite-2">
-                        <label for="microsite-2">theme-2</label>
+                    <div class="microsite-2 atlas-theme-switcher__switch">
+                        <input type="radio" class="atlas-theme-switcher__radio" name="theme" id="microsite-2" value="microsite-2">
+                        <label for="microsite-2">02</label>
                     </div>
 
-                    <div class="microsite-3">
-                        <input type="radio" class="theme-radio" name="theme" id="microsite-3" value="microsite-3">
-                        <label for="microsite-3">theme-3</label>
+                    <div class="microsite-3 atlas-theme-switcher__switch">
+                        <input type="radio" class="atlas-theme-switcher__radio" name="theme" id="microsite-3" value="microsite-3">
+                        <label for="microsite-3">03</label>
                     </div>
                 </div>
 
@@ -68,7 +54,7 @@
             </script>
 
             <script>
-                const themeRadios = document.querySelectorAll('.theme-radio');
+                const themeRadios = document.querySelectorAll('.atlas-theme-switcher__radio');
                 const body = document.body;
                 let currentTheme = null;
 

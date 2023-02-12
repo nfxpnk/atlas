@@ -429,4 +429,96 @@ And used for hide parts of aside for this case.
 	display: -ms-flexbox;
 	display: flex;
 }
+
+.atlas-theme-switcher {
+	font-family: "Arial", "FreeSans", sans-serif;
+	font-size: 12.8px;
+	-ms-flex-align: center;
+	    align-items: center;
+	display: -ms-flexbox;
+	display: flex;
+	gap: 6px;
+	margin: 20px 0;
+	-ms-flex-pack: center;
+	    justify-content: center;
+}
+.atlas-theme-switcher__radio {
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	opacity: 0;
+}
+.atlas-theme-switcher__radio + label {
+	padding: 8px;
+	cursor: pointer;
+	border: 1px solid lightgrey;
+	border-radius: 6px;
+	font-weight: 700;
+}
+.atlas-theme-switcher__radio + label:hover {
+	background: var(--color-primary-800);
+	color: #fff;
+}
+.atlas-theme-switcher__radio:checked + label {
+	background: var(--color-primary-800);
+	color: #fff;
+}
+
+.atlas-colors {
+	list-style: none;
+	padding: 0;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: start;
+	    justify-content: flex-start;
+	-ms-flex-align: stretch;
+	    align-items: stretch;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+}
+
+.atlas-colors__item {
+	width: 20%;
+	margin-bottom: 10px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.atlas-color {
+	background: white;
+	border: 1px solid black;
+	margin: 0;
+	padding: 0;
+}
+
+.atlas-color__figure {
+	position: relative;
+	background-image: linear-gradient(45deg, #f1f1f1 25%, transparent 25%, transparent 75%, #f1f1f1 75%, #f1f1f1), linear-gradient(45deg, #f1f1f1 25%, transparent 25%, transparent 75%, #f1f1f1 75%, #f1f1f1);
+	background-position: 0 0, 6px 6px;
+	background-size: 12px 12px;
+	height: 3em;
+}
+
+.atlas-color__figure-color {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.atlas-color__caption {
+	padding: 0.5em;
+}
+
+.atlas-color__name {
+	display: block;
+	font-weight: bold;
+	color: black;
+}
+
+.atlas-color__code {
+	display: block;
+	color: black;
+}
 /*# sourceMappingURL=dev_atlas-frame.css.map */

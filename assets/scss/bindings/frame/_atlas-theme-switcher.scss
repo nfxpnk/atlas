@@ -1,7 +1,36 @@
 .atlas-theme-switcher {
+	align-items: center;
 	display: flex;
+	font-family: $font-sans-atlas;
+	font-size: $atlas-scale-secondary;
+	gap: 6px;
+	justify-content: center;
+	margin: 10px 0 20px;
 
-	.theme-radio + label {
-		color: var(--color-primary-800);
+	&__radio {
+		height: 1px;
+		opacity: 0;
+		overflow: hidden;
+		width: 1px;
+	}
+
+	&__radio + label {
+		border-radius: 6px;
+		border: 1px solid lightgrey;
+		cursor: pointer;
+		font-weight: 700;
+		padding: 8px;
+
+		&:hover {
+			background: var(--color-primary-800);
+			border-color: transparent;
+			color: #fff;
+		}
+	}
+
+	&__radio:checked + label {
+		background: var(--color-primary-800);
+		border-color: transparent;
+		color: #fff;
 	}
 }
