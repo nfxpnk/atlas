@@ -36,56 +36,6 @@ module.exports = function(config, component) {
     // Object with group data
     let themeColorGroup = {variables: []};
 
-    for (let i = 0; i <= lines.length; ++i) {
-        let line = lines[i];
-        if (typeof line == 'undefined') {
-            continue;
-        }
-        line = line.trim();
-
-        if (line.startsWith('// #' + id)) {
-            if(currentVariable) {
-                themeColorGroups.push(themeColorGroup);
-                themeColorGroup = {variables: []};
-            }
-            const data = line.split(':');
-            themeColorGroup.originalComment = data[0];
-            const name = data[0].slice(9);
-            const dataName = name.split(' - ');
-            themeColorGroup.name = dataName[1];
-            themeColorGroup.group = dataName[0];
-        }
-
-        const idRegex = '-' + id;
-        const themeRegex = new RegExp('^(\\$color-(primary|secondary))' + idRegex);
-        const match = line.match(themeRegex);
-        if (match) {
-            currentVariable = match[1];
-            themeColorGroup.originalVariable = match[0];
-            themeColorGroup.variable = currentVariable;
-        }
-
-        if (currentVariable && line.match(/^\d/)) {
-            let [key, hex] = line.split(':').map(part => part.trim());
-            let variableName = currentVariable + '-' + key;
-
-            if(hex.endsWith(',')) {
-                hex = hex.slice(0, -1);
-            }
-
-            scssVariablesArray[variableName] = hex;
-            themeColorGroup.variables.push({name: variableName, key: key, hex: hex});
-        }
-
-        if(line.startsWith('// #end ' + id)) {
-            themeColorGroups.push(themeColorGroup);
-            break;
-        }
-    }
-
-    // Debug section
-    //console.log(JSON.stringify(themeColorGroups, null, 5));
-
     // Object with color section {name: sectionName, properties: [array {cssVariables}]}
     let colorsCollection = {};
     colorsCollection = {values: []};
@@ -131,10 +81,17 @@ module.exports = function(config, component) {
                 hex = hex.slice(0, -1);
             }
 
+            if(hex.startsWith('$')) {
+                hex = scssVariablesArray[hex];
+            }
+
             if(hex.startsWith('rgb')) {
                 let scssVar1 = hex.match(/(\$color(.+?)),/);
-                let scssVar = scssVariablesArray[scssVar1[1]];
-                hex = hex.replace(scssVar1[0], hexToRgb(scssVar)+',');
+                let scssVar = null;
+                if(scssVar1) {
+                    scssVar = scssVariablesArray[scssVar1[1]];
+                    hex = hex.replace(scssVar1[0], hexToRgb(scssVar)+',');
+                }
             }
 
             scssVariablesArray[name] = hex;
@@ -146,13 +103,75 @@ module.exports = function(config, component) {
     // console.log(JSON.stringify(colorSections, null, 4));
     // console.log(scssVariablesArray);
 
+    let schemes = null;
+    for (let i = 0; i <= lines.length; ++i) {
+        let line = lines[i];
+        if (typeof line == 'undefined') {
+            continue;
+        }
+        if (line.startsWith('// Schemes')) {
+            schemes = true;
+        }
+
+        if(schemes === null) {
+            continue;
+        }
+
+        line = line.trim();
+
+        if (line.startsWith('// #' + id)) {
+            if(currentVariable) {
+                themeColorGroups.push(themeColorGroup);
+                themeColorGroup = {variables: []};
+            }
+            const data = line.split(':');
+            themeColorGroup.originalComment = data[0];
+            const name = data[0].slice(9);
+            const dataName = name.split(' - ');
+            themeColorGroup.name = dataName[1];
+            themeColorGroup.group = dataName[0];
+        }
+
+        const idRegex = '-' + id;
+        const themeRegex = new RegExp('^(\\$color-(primary|secondary))' + idRegex);
+        const match = line.match(themeRegex);
+        if (match) {
+            currentVariable = match[1];
+            themeColorGroup.originalVariable = match[0];
+            themeColorGroup.variable = currentVariable;
+        }
+
+        if (currentVariable && line.match(/^\d/)) {
+            let [key, hex] = line.split(':').map(part => part.trim());
+            let variableName = currentVariable + '-' + key;
+
+            if(hex.endsWith(',')) {
+                hex = hex.slice(0, -1);
+            }
+
+            if(hex.startsWith('$')) {
+                hex = scssVariablesArray[hex];
+            }
+
+            scssVariablesArray[variableName] = hex;
+            themeColorGroup.variables.push({name: variableName, key: key, hex: hex});
+        }
+
+        if(line.startsWith('// #end ' + id)) {
+            themeColorGroups.push(themeColorGroup);
+            break;
+        }
+    }
+
+    // Debug section
+    //console.log(JSON.stringify(themeColorGroups, null, 5));
+
     let cssSection = {values:[]};
 
     // Array of color objects {name:'', scssVariable: '', value:''}
     let cssVariables = [];
 
     let cssColors = null;
-
     // CSS Properties
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
