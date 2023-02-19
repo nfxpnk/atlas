@@ -81,7 +81,9 @@ module.exports = function(config, component) {
                 hex = hex.slice(0, -1);
             }
 
+            let variable = null;
             if(hex.startsWith('$')) {
+                variable = hex;
                 hex = scssVariablesArray[hex];
             }
 
@@ -95,7 +97,7 @@ module.exports = function(config, component) {
             }
 
             scssVariablesArray[name] = hex;
-            colorsCollection.values.push({name: name, hex: hex});
+            colorsCollection.values.push({name: name, scssVariable: variable, hex: hex});
         }
     }
 
@@ -149,12 +151,14 @@ module.exports = function(config, component) {
                 hex = hex.slice(0, -1);
             }
 
+            let variable = null;
             if(hex.startsWith('$')) {
+                variable = hex;
                 hex = scssVariablesArray[hex];
             }
 
             scssVariablesArray[variableName] = hex;
-            themeColorGroup.variables.push({name: variableName, key: key, hex: hex});
+            themeColorGroup.variables.push({name: variableName, key: key, scssVariable: variable, hex: hex});
         }
 
         if(line.startsWith('// #end ' + id)) {
