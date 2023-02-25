@@ -45,9 +45,8 @@
     "last 2 Chrome versions",
     "last 2 Firefox versions",
     "last 2 Edge versions",
-    "ie >= 10",
-    "Safari >= 10",
-    "iOS >= 9",
+    "Safari >= 14",
+    "iOS >= 14",
     "last 2 Samsung versions",
     "last 2 ChromeAndroid versions"
   ],
@@ -57,8 +56,6 @@
   },
   "scripts": {
     "lint": "eslint ./ && stylelint ./",
-    "test": "nyc mocha",
-    "coverage": "nyc report --reporter=lcov --reporter=text-lcov",
     "build": "gulp build",
     "copyhooks": "node .githooks/copy-hooks.js",
     "version": "npm run build && git add -A assets",
