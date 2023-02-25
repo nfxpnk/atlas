@@ -24,9 +24,6 @@ module.exports = function(config, component) {
     // Array with all scss variables [$color-var => #value]
     let scssVariablesArray = [];
 
-    // Array of color objects {name:'', value:''}
-    let scssVariables = [];
-
     // Current processed varibale
     let currentVariable = null;
 
@@ -46,7 +43,7 @@ module.exports = function(config, component) {
     let sharedColors = null;
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
-        if (typeof line == 'undefined') {
+        if (typeof line === 'undefined') {
             continue;
         }
 
@@ -54,7 +51,7 @@ module.exports = function(config, component) {
             sharedColors = true;
         }
 
-        if(sharedColors === null) {
+        if (sharedColors === null) {
             continue;
         }
 
@@ -77,22 +74,22 @@ module.exports = function(config, component) {
         if (line.startsWith('$color-')) {
             let [name, hex] = line.split(':').map(part => part.trim());
 
-            if(hex.endsWith(';')) {
+            if (hex.endsWith(';')) {
                 hex = hex.slice(0, -1);
             }
 
             let variable = null;
-            if(hex.startsWith('$')) {
+            if (hex.startsWith('$')) {
                 variable = hex;
                 hex = scssVariablesArray[hex];
             }
 
-            if(hex.startsWith('rgb')) {
+            if (hex.startsWith('rgb')) {
                 let scssVar1 = hex.match(/(\$color(.+?)),/);
                 let scssVar = null;
-                if(scssVar1) {
+                if (scssVar1) {
                     scssVar = scssVariablesArray[scssVar1[1]];
-                    hex = hex.replace(scssVar1[0], hexToRgb(scssVar)+',');
+                    hex = hex.replace(scssVar1[0], hexToRgb(scssVar) + ',');
                 }
             }
 
@@ -108,21 +105,21 @@ module.exports = function(config, component) {
     let schemes = null;
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
-        if (typeof line == 'undefined') {
+        if (typeof line === 'undefined') {
             continue;
         }
         if (line.startsWith('// Schemes')) {
             schemes = true;
         }
 
-        if(schemes === null) {
+        if (schemes === null) {
             continue;
         }
 
         line = line.trim();
 
         if (line.startsWith('// #' + id)) {
-            if(currentVariable) {
+            if (currentVariable) {
                 themeColorGroups.push(themeColorGroup);
                 themeColorGroup = {variables: []};
             }
@@ -147,12 +144,12 @@ module.exports = function(config, component) {
             let [key, hex] = line.split(':').map(part => part.trim());
             let variableName = currentVariable + '-' + key;
 
-            if(hex.endsWith(',')) {
+            if (hex.endsWith(',')) {
                 hex = hex.slice(0, -1);
             }
 
             let variable = null;
-            if(hex.startsWith('$')) {
+            if (hex.startsWith('$')) {
                 variable = hex;
                 hex = scssVariablesArray[hex];
             }
@@ -161,7 +158,7 @@ module.exports = function(config, component) {
             themeColorGroup.variables.push({name: variableName, key: key, scssVariable: variable, hex: hex});
         }
 
-        if(line.startsWith('// #end ' + id)) {
+        if (line.startsWith('// #end ' + id)) {
             themeColorGroups.push(themeColorGroup);
             break;
         }
@@ -170,7 +167,7 @@ module.exports = function(config, component) {
     // Debug section
     //console.log(JSON.stringify(themeColorGroups, null, 5));
 
-    let cssSection = {values:[]};
+    let cssSection = {values: []};
 
     // Array of color objects {name:'', scssVariable: '', value:''}
     let cssVariables = [];
@@ -179,7 +176,7 @@ module.exports = function(config, component) {
     // CSS Properties
     for (let i = 0; i <= lines.length; ++i) {
         let line = lines[i];
-        if (typeof line == 'undefined') {
+        if (typeof line === 'undefined') {
             continue;
         }
 
@@ -187,7 +184,7 @@ module.exports = function(config, component) {
             cssColors = true;
         }
 
-        if(cssColors === null) {
+        if (cssColors === null) {
             continue;
         }
 
@@ -209,7 +206,7 @@ module.exports = function(config, component) {
 
         if (line.startsWith('\'')) {
             let [name, value] = line.split(':').map(part => part.trim());
-            if(value.endsWith(',')) {
+            if (value.endsWith(',')) {
                 value = value.slice(0, -1);
             }
             let variable = '';
@@ -222,10 +219,10 @@ module.exports = function(config, component) {
                 color = scssVariable;
             }
 
-            if(color.startsWith('hextorgb')) {
+            if (color.startsWith('hextorgb')) {
                 let scssVar1 = color.match(/\((.+?)\)/);
                 let scssVar = scssVariablesArray[scssVar1[1]];
-                color = 'rgb(' +hexToRgb(scssVar) + ')';
+                color = 'rgb(' + hexToRgb(scssVar) + ')';
             }
 
             cssSection.values.push({ name: name.slice(1, -1), scssVariable: variable, value: color });
@@ -236,5 +233,10 @@ module.exports = function(config, component) {
     //console.log(cssSection);
     //console.log(JSON.stringify(cssVariables,null,4));
 
-    return { component: component, themeColorGroups: themeColorGroups, colorSections: colorSections, cssVariables: cssVariables };
+    return {
+        component: component,
+        themeColorGroups: themeColorGroups,
+        colorSections: colorSections,
+        cssVariables: cssVariables
+    };
 };
