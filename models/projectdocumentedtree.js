@@ -43,7 +43,7 @@ function pageConfig(id, title, target, isDocumented, isDocs) {
         id: id,
         title: title,
         type: isDocs ? 'guide' : /^l-/i.test(title) ? 'container' : 'component', // TODO: configuration
-        icon: isDocs ? 'guide' : /^l-/i.test(title) ? 'container' : 'component', // TODO: configuration
+        icon: isDocs ? 'markdown-16' : /^l-/i.test(title) ? 'file-16' : 'file-code-16', // TODO: configuration
         src: target,
         target: guideDest + id + '.html',
         template: isDocs ? templates.docs : templates.component,
@@ -57,6 +57,7 @@ function categoryConfig(title) {
     return {
         title: title,
         type: 'category',
+        icon: 'file-directory-fill-16',
         isDeprecated: false,
         subPages: []
     };

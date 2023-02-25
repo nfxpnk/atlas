@@ -15,7 +15,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
                 src: indexSrc,
                 target: path.join(dest, '/colors-theme-' + theme + '.html'),
                 type: 'colors',
-                icon: 'about',
+                icon: 'info-16',
                 isDeprecated: false,
                 subPages: []
             }
@@ -51,7 +51,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         src: indexSrc,
         target: path.join(dest, '/index.html'),
         type: 'about',
-        icon: 'about',
+        icon: 'info-16',
         isDeprecated: false,
         subPages: []
     });

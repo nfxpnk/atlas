@@ -17,7 +17,9 @@ module.exports = function(atlasConfig, projectTree, writePage) {
     // Utils
     const normalizePath = require('./utils/normalizepath');
     const prepareContent = require('./utils/preparecontent')(
-        atlasConfig, projectTree).prepareContent;
+            atlasConfig,
+            projectTree
+        ).prepareContent;
 
     /**
      * Walk though documented files in project and generate particular page (if path specified)

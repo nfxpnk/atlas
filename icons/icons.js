@@ -16,7 +16,8 @@ const icons = [
     'book-16',
     'paintbrush-16',
     'confluence',
-    'icons'
+    'icons',
+    'colors'
 ];
 
 const iconsFile = '../views/includes/partials/icons.mustache';
