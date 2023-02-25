@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const gulp = require('gulp');
 const connect = require('gulp-connect');
 const sass = require('gulp-sass')(require('sass'));
@@ -8,8 +9,16 @@ const autoprefixer = require('autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const log = require('fancy-log');
 const c = require('ansi-colors');
-const atlas = require('./app/atlas-guide-custom.js').withConfig('./.atlasrc.json');
-const config = require('./.atlasrc.json');
+
+let currentConfig = './.atlasrc.current.json'
+if (fs.existsSync(currentConfig) === false) {
+    currentConfig = './.atlasrc.json';
+}
+
+log('Current config file is: ' + c.cyan(currentConfig));
+
+const atlas = require('./app/atlas-guide-custom.js').withConfig(currentConfig);
+const config = require(currentConfig);
 
 // Atlas styles source
 config.sassSrc = 'assets/scss/';
