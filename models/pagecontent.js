@@ -10,14 +10,14 @@ const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 const renderer = new marked.Renderer();
 
 const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
+    sentencesPerParagraph: {
+        max: 8,
+        min: 4
+    },
+    wordsPerSentence: {
+        max: 16,
+        min: 4
+    }
 });
 
 marked.setOptions({
@@ -117,7 +117,7 @@ function mdImport(fileURL, options) {
 
         let exampleArray = [];
         const modifierRegexp = new RegExp('<!--\\s+Classes:([\\s\\S]+?)-->', 'ui');
-        if(modifierRegexp.test(code) === true) {
+        if (modifierRegexp.test(code) === true) {
             let modifierCode = code.split(modifierRegexp);
             modifierCode[1] = modifierCode[1].trim();
 
@@ -159,16 +159,16 @@ function mdImport(fileURL, options) {
 
         codeItemCount += 1;
 
-        if(exampleArray.length > 1) {
+        if (exampleArray.length > 1) {
             return exampleMarkupArray;
-        } else if(language === 'html_example') {
+        } else if (language === 'html_example') {
             return exampleMarkup;
-        } else if(language === 'pug_example') {
+        } else if (language === 'pug_example') {
             let pugFn = pug.compile(code, {pretty: true});
             let pugCompiled = pugFn().trim();
 
             const re = new RegExp('{lorem', 'i');
-            while(re.test(pugCompiled)) {
+            while (re.test(pugCompiled)) {
                 pugCompiled = pugCompiled.replace('{lorem}', lorem.generateSentences(1));
                 pugCompiled = pugCompiled.replace('{loremWord}', lorem.generateWords(1));
             }
@@ -179,7 +179,7 @@ function mdImport(fileURL, options) {
                 title: options.title + '-code-' + codeItemCount
             });
         } else {
-            return regularMarkup
+            return regularMarkup;
         }
     };
 
