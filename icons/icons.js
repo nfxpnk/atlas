@@ -3,6 +3,8 @@
 const fs = require('fs');
 
 const icons = [
+    'info-16',
+    'markdown-16',
     'file-16',
     'file-code-16',
     'file-directory-fill-16',
@@ -13,7 +15,8 @@ const icons = [
     'hash-16',
     'book-16',
     'paintbrush-16',
-    'confluence'
+    'confluence',
+    'icons'
 ];
 
 const iconsFile = '../views/includes/partials/icons.mustache';
