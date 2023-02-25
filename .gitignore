@@ -33,7 +33,8 @@ node_modules
 _example/atlas-static/*.html
 _example/atlas-static/assets
 
-icons/octicons
+icons/octicons/*
 !icons/octicons/readme.txt
+
 
 views/includes/partials/project-head.mustache
