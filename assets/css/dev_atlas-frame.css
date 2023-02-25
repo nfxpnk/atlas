@@ -60,7 +60,7 @@ And used for hide parts of aside for this case.
 }
 .l-atlas-container__aside {
 	bottom: 0;
-	box-shadow: 1px 0 0 0 hsl(0deg, 0%, 87%);
+	box-shadow: 1px 0 0 0 hsl(0, 0%, 87%);
 	left: 0;
 	position: fixed;
 	top: 0;
@@ -68,7 +68,7 @@ And used for hide parts of aside for this case.
 	z-index: 2;
 }
 .l-atlas-container__main {
-	background-color: hsl(0deg, 0%, 100%);
+	background-color: hsl(0, 0%, 100%);
 	margin-left: 250px;
 	position: relative;
 	z-index: 1;
@@ -87,7 +87,7 @@ And used for hide parts of aside for this case.
 .atlas-search__input {
 	-webkit-appearance: none;
 	background: transparent;
-	border: 1px solid hsl(0deg, 0%, 87%);
+	border: 1px solid hsl(0, 0%, 87%);
 	border-radius: 5px;
 	box-sizing: border-box;
 	font-family: "Arial", "FreeSans", sans-serif;
@@ -109,7 +109,7 @@ And used for hide parts of aside for this case.
 	display: none;
 }
 .atlas-search__icon {
-	color: hsl(210deg, 0%, 35%);
+	color: hsl(210, 0%, 35%);
 	height: 16px;
 	left: 6px;
 	position: absolute;
@@ -117,13 +117,13 @@ And used for hide parts of aside for this case.
 	width: 16px;
 }
 .js-found .atlas-search__icon {
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 }
 .atlas-search__clear {
 	background: #919191;
 	border: none;
 	border-radius: 50%;
-	color: hsl(0deg, 0%, 100%);
+	color: hsl(0, 0%, 100%);
 	height: 14px;
 	line-height: 14px;
 	outline: none;
@@ -139,7 +139,7 @@ And used for hide parts of aside for this case.
 	background: #787878;
 }
 .atlas-search__clear:focus {
-	background: hsl(213deg, 75%, 54%);
+	background: hsl(213, 75%, 54%);
 }
 .atlas-search__clear:active {
 	background: #5e5e5e;
@@ -179,7 +179,7 @@ And used for hide parts of aside for this case.
 	right: -1px;
 }
 .atlas-aside-ctrl:hover, .atlas-aside-ctrl:focus {
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 }
 .js-aside-panel-hidden .atlas-aside-ctrl {
 	cursor: pointer;
@@ -207,13 +207,11 @@ And used for hide parts of aside for this case.
 }
 .atlas-aside {
 	all: initial;
-	background-color: hsl(0deg, 0%, 95%);
+	background-color: hsl(0, 0%, 95%);
 	bottom: 0;
-	color: hsl(210deg, 0%, 35%);
-	display: -ms-flexbox;
+	color: hsl(210, 0%, 35%);
 	display: flex;
-	-ms-flex-direction: column;
-	    flex-direction: column;
+	flex-direction: column;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	height: 100%;
@@ -227,7 +225,6 @@ And used for hide parts of aside for this case.
 .atlas-aside__content {
 	overflow-y: auto;
 	-webkit-overscroll-behavior: contain;
-	-ms-scroll-chaining: none;
 	overscroll-behavior: contain; /* stylelint-disable-line */
 }
 .atlas-aside__footer {
@@ -236,7 +233,7 @@ And used for hide parts of aside for this case.
 	position: relative;
 }
 .atlas-aside__footer::after {
-	background: linear-gradient(rgba(255, 255, 255, 0), hsl(0deg, 0%, 95%));
+	background: linear-gradient(rgba(255, 255, 255, 0), hsl(0, 0%, 95%));
 	content: "";
 	display: block;
 	height: 20px;
@@ -285,7 +282,6 @@ And used for hide parts of aside for this case.
 	text-overflow: ellipsis;
 	transition: opacity ease 0.2s;
 	-webkit-user-select: none;
-	    -ms-user-select: none;
 	        user-select: none;
 	white-space: nowrap;
 }
@@ -294,10 +290,10 @@ And used for hide parts of aside for this case.
 	text-decoration: none;
 }
 .atlas-nav__ln:active {
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 }
 .atlas-nav__ln.js-current-page {
-	background-color: hsl(0deg, 0%, 88%);
+	background-color: hsl(0, 0%, 88%);
 	color: black;
 	cursor: default;
 	pointer-events: none;
@@ -327,10 +323,9 @@ And used for hide parts of aside for this case.
 	font-style: italic;
 }
 .atlas-nav > .atlas-nav__item > .atlas-nav__ln {
-	background: hsl(0deg, 0%, 95%);
+	background: hsl(0, 0%, 95%);
 	display: block;
 	padding: 10px 0 10px 20px;
-	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
 	z-index: 1;
@@ -378,7 +373,7 @@ And used for hide parts of aside for this case.
 	pointer-events: none;
 }
 .js-found .atlas-nav__ln.js-relevant {
-	color: hsl(210deg, 0%, 35%);
+	color: hsl(210, 0%, 35%);
 	cursor: pointer;
 	display: block;
 	pointer-events: initial;
@@ -387,7 +382,7 @@ And used for hide parts of aside for this case.
 	color: black;
 }
 .js-found .atlas-nav__ln.js-relevant:active {
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 }
 .js-found .atlas-nav__sub-nav,
 .js-found .atlas-nav__ln._category {
@@ -396,7 +391,7 @@ And used for hide parts of aside for this case.
 
 .atlas-footer-copyright {
 	all: unset;
-	color: hsl(210deg, 0%, 35%);
+	color: hsl(210, 0%, 35%);
 	display: block;
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 10px;
@@ -410,14 +405,12 @@ And used for hide parts of aside for this case.
 }
 
 .atlas-loader {
-	-ms-flex-align: center;
-	    align-items: center;
+	align-items: center;
 	background: rgba(255, 255, 255, 0.96);
 	bottom: 0;
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 	display: none;
-	-ms-flex-pack: center;
-	    justify-content: center;
+	justify-content: center;
 	left: 0;
 	position: absolute;
 	right: 0;
@@ -426,20 +419,16 @@ And used for hide parts of aside for this case.
 	z-index: 2;
 }
 .js-loading-frame .atlas-loader {
-	display: -ms-flexbox;
 	display: flex;
 }
 
 .atlas-theme-switcher {
-	-ms-flex-align: center;
-	    align-items: center;
-	display: -ms-flexbox;
+	align-items: center;
 	display: flex;
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 12.8px;
 	gap: 6px;
-	-ms-flex-pack: center;
-	    justify-content: center;
+	justify-content: center;
 	margin: 10px 0 20px;
 }
 .atlas-theme-switcher__radio {
@@ -469,14 +458,10 @@ And used for hide parts of aside for this case.
 .atlas-colors {
 	list-style: none;
 	padding: 0;
-	display: -ms-flexbox;
 	display: flex;
-	-ms-flex-pack: start;
-	    justify-content: flex-start;
-	-ms-flex-align: stretch;
-	    align-items: stretch;
-	-ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-wrap: wrap;
 }
 
 .atlas-colors__item {

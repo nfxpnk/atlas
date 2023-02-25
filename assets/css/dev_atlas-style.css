@@ -1,5 +1,5 @@
 .atlas-style-section {
-	color: hsl(210deg, 0%, 35%);
+	color: hsl(210, 0%, 35%);
 	margin: 20px 0 60px;
 	position: relative;
 }
@@ -12,17 +12,14 @@
 }
 
 .atlas-style-columns {
-	display: -ms-flexbox;
 	display: flex;
-	-ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 .atlas-style-columns__item {
 	margin-bottom: 20px;
 }
 .atlas-style-columns__item._bottom {
-	-ms-flex-item-align: end;
-	    align-self: flex-end;
+	align-self: flex-end;
 }
 .atlas-style-columns._span6 .atlas-style-columns__item {
 	width: 16.6666666667%;
@@ -32,8 +29,7 @@
 	width: 33.3333333333%;
 }
 .atlas-style-columns._box {
-	-ms-flex-align: end;
-	    align-items: flex-end;
+	align-items: flex-end;
 }
 .atlas-style-columns._box .atlas-style-columns__item {
 	margin: 1px;
@@ -55,12 +51,9 @@
 }
 
 .atlas-style-scale {
-	-ms-flex-align: center;
-	    align-items: center;
-	display: -ms-flexbox;
+	align-items: center;
 	display: flex;
-	-ms-flex-pack: justify;
-	    justify-content: space-between;
+	justify-content: space-between;
 	margin-bottom: 0.5em;
 	width: 100%;
 }
@@ -91,8 +84,7 @@
 	margin-right: 20px;
 }
 .atlas-style-font__caption {
-	border-top: 1px solid hsl(0deg, 0%, 70%);
-	display: -ms-flexbox;
+	border-top: 1px solid hsl(0, 0%, 70%);
 	display: flex;
 	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
 	font-size: 11px;
@@ -138,22 +130,18 @@
 	width: 100%;
 }
 .atlas-style-layer__box {
-	-ms-flex-align: center;
-	    align-items: center;
-	display: -ms-flexbox;
+	align-items: center;
 	display: flex;
 	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
 	font-size: 11px;
 	height: 100%;
-	-ms-flex-pack: center;
-	    justify-content: center;
+	justify-content: center;
 	position: absolute;
 	text-align: center;
 	width: 100%;
 }
 
 .atlas-style-motion {
-	display: -ms-flexbox;
 	display: flex;
 }
 .atlas-style-motion__caption {
@@ -170,7 +158,7 @@
 }
 .atlas-style-motion__ball {
 	animation-play-state: paused !important; /* stylelint-disable-line */
-	background-color: hsl(213deg, 75%, 54%);
+	background-color: hsl(213, 75%, 54%);
 	border-radius: 100%;
 	height: 10px;
 	left: 0;
@@ -195,8 +183,8 @@
 	margin: 40px 0;
 }
 .atlas-style-space__text {
-	background-color: hsl(213deg, 66%, 79%);
-	color: hsl(213deg, 66%, 79%);
+	background-color: hsl(213, 66%, 79%);
+	color: hsl(213, 66%, 79%);
 }
 .atlas-style-space__name {
 	left: 0;
@@ -212,13 +200,11 @@
 	text-align: center;
 }
 .atlas-style-space._vertical {
-	display: -ms-flexbox;
 	display: flex;
 	overflow: hidden;
 	overflow-x: auto;
 }
 .atlas-style-space._vertical .atlas-style-space__item {
-	display: -ms-flexbox;
 	display: flex;
 	text-align: justify;
 }
@@ -284,11 +270,9 @@
 	position: relative;
 }
 .atlas-style-box__inner {
-	-ms-flex-align: center;
-	    align-items: center;
-	background-color: hsl(0deg, 0%, 100%);
+	align-items: center;
+	background-color: hsl(0, 0%, 100%);
 	box-sizing: border-box;
-	display: -ms-flexbox;
 	display: flex;
 	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
 	font-size: 11px;
@@ -298,21 +282,18 @@
 }
 
 .atlas-style-breaks {
-	display: -ms-flexbox;
 	display: flex;
 	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
 	font-size: 11px;
 	margin-bottom: 40px;
 }
 .atlas-style-breaks__item {
-	-ms-flex-align: center;
-	    align-items: center;
+	align-items: center;
 	counter-increment: breaks;
-	display: -ms-flexbox;
 	display: flex;
 }
 .atlas-style-breaks__item::before {
-	color: hsl(213deg, 75%, 54%);
+	color: hsl(213, 75%, 54%);
 	content: counter(breaks);
 	display: inline-block;
 	font-family: "Arial", "FreeSans", sans-serif;
@@ -332,13 +313,13 @@
 	font-size: 11px;
 }
 .atlas-style-breaks-graph .atlas-tick-lines line {
-	stroke: hsl(0deg, 0%, 80%);
+	stroke: hsl(0, 0%, 80%);
 }
 .atlas-style-breaks-graph .atlas-tick-hints line {
-	stroke: hsl(0deg, 0%, 80%);
+	stroke: hsl(0, 0%, 80%);
 }
 .atlas-style-breaks-graph .atlas-tick-hints text {
-	fill: hsl(213deg, 75%, 54%);
+	fill: hsl(213, 75%, 54%);
 	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
 }
 /*# sourceMappingURL=dev_atlas-style.css.map */
