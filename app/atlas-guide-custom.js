@@ -26,7 +26,7 @@ function withConfig(configPath) {
         atlasConfig, projectTree, writePage).buildComponent;
 
     // Copy internal assets to the components destinations
-    log(atlasConfig.internalAssetsPath, atlasConfig.guideDest);
+    log(c.green(atlasConfig.internalAssetsPath), atlasConfig.guideDest);
     require(path.join(__dirname, '/utils/copyassets.js'))(atlasConfig.internalAssetsPath, atlasConfig.guideDest);
 
     return {
