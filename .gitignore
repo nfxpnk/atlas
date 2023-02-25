@@ -29,7 +29,7 @@ node_modules
 .nyc_output
 
 
-atlas/*.html
-atlas/assets
+_example/atlas-static/*.html
+_example/atlas-static/assets
 
 views/includes/partials/project-head.mustache

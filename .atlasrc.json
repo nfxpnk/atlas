@@ -1,12 +1,12 @@
 {
-    "guideSrc": "assets/src/scss/",
-    "guideDest": "atlas",
+    "guideSrc": "_example/scss-source/",
+    "guideDest": "_example/atlas-static",
     "cssSrc": "assets/css/",
-    "copyInternalAssets": false,
+    "copyInternalAssets": true,
     "excludedSassFiles": "_dev-atlas-settings|_dev-atlas-definitions",
     "componentPrefixes": ["atlas-", "l-"],
     "projectConstants": {
-        "constantsSrc": "assets/src/scss/_dev-atlas-settings.scss",
+        "constantsSrc": "",
         "colorPrefix": "color",
         "fontPrefix": "font",
         "scalePrefix": "scale",
