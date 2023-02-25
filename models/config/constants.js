@@ -2,8 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 const projectRoot = process.cwd();
-const printMessage = require('../utils/printmessage');
 
 function prepareSCSSConstantsFiles(constantsSrc) {
     const sourcesListRaw = Array.isArray(constantsSrc) ? constantsSrc : [constantsSrc];
@@ -86,7 +87,7 @@ function getDeclaredConstants(config) {
 
     if (config.projectConstants.constantsSrc === undefined) {
         if (Object.keys(config.projectConstants).length > 0) {
-            printMessage('warn', 'It seems "projectConstants" is declared, but path to constants file' +
+            log(c.yellow('Warning: ') + 'It seems "projectConstants" is declared, but path to constants file' +
                 ' ("constantsSrc") is missed. Constants could not be fetched.');
         }
         return result;
@@ -96,7 +97,7 @@ function getDeclaredConstants(config) {
         //settingsFilesData = prepareSCSSConstantsFiles(config.projectConstants.constantsSrc);
         settingsFilesData = {};
     } catch (e) {
-        printMessage('warn', '"projectConstants" is declared, but constants file not found (' + e +
+        log(c.yellow('Warning: ') + '"projectConstants" is declared, but constants file not found (' + e +
             '). Constants could not be fetched.');
         return result;
     }

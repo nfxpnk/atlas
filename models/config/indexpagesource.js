@@ -2,7 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const printMessage = require('../utils/printmessage');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 
 function getIndexPageSource(projectRoot, guideSrc, indexPageSource) {
     const inConfig = indexPageSource ? path.join(projectRoot, indexPageSource) : '';
@@ -11,7 +12,7 @@ function getIndexPageSource(projectRoot, guideSrc, indexPageSource) {
     let indexSrc;
 
     if (indexPageSource !== undefined && !fs.existsSync(inConfig)) {
-        printMessage('warn', '"indexPageSource" is defined, but resource is unavailable or unreadable. ' +
+        log(c.yellow('Warning: ') + '"indexPageSource" is defined, but resource is unavailable or unreadable. ' +
             'Please check this path in config. Fallback to README.md');
     }
 

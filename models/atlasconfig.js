@@ -2,15 +2,16 @@
 
 const fs = require('fs');
 const path = require('path');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 const projectRoot = process.cwd();
 
-const printMessage = require('./utils/printmessage');
 const fillTemplatesConfig = (templatesConfig, internalTemplatesPath, name) => {
     let templates = {};
 
     fs.readdirSync(path.join(__dirname, internalTemplatesPath)).forEach(item => {
         // Exclude all other files
-        if(path.extname(item) === '.mustache') {
+        if (path.extname(item) === '.mustache') {
             templates[path.basename(item, '.mustache')] = '';
         }
     });
@@ -22,7 +23,8 @@ const fillTemplatesConfig = (templatesConfig, internalTemplatesPath, name) => {
                 templates[template] = templatePath;
                 return;
             } else {
-                printMessage('warn', '"' + template + ' (' + templatePath + ')" ' + name + ' is declared, but file not found. ' +
+                log(c.yellow('Warning: ') +
+                    '"' + template + ' (' + templatePath + ')" ' + name + ' is declared, but file not found. ' +
                     'Internal partial used for this include.');
             }
         }
@@ -41,7 +43,8 @@ function getProjectInfo(config) {
         projectName = config.projectInfo.name;
     } else {
         if (!pkg.name) {
-            printMessage('warn', 'Neither "projectName" in atlas, nor "name" in package.json is declared. ' +
+            log(c.yellow('Warning: ') +
+                'Neither "projectName" in atlas, nor "name" in package.json is declared. ' +
                 '"atlas" name used instead.');
         } else {
             projectName = pkg.name.replace('/', '-'); // fix namespaced project names

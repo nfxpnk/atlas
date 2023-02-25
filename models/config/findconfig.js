@@ -2,8 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 const projectRoot = process.cwd();
-const printMessage = require('../utils/printmessage');
 
 function findConfig(config) {
     if (config !== undefined) {
@@ -16,7 +17,7 @@ function findConfig(config) {
         }
     }
 
-    printMessage('error', 'Could not find Atlas configuration. Please pass path to config ' +
+    log(c.red('Error: ') + 'Could not find Atlas configuration. Please pass path to config ' +
         'or raw config object into atlas.withConfig()');
 
     return undefined;
