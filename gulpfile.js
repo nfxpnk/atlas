@@ -21,7 +21,7 @@ const atlas = require('./app/atlas-guide-custom.js').withConfig(currentConfig);
 const config = require(currentConfig);
 
 // Atlas styles source
-config.sassSrc = 'assets/scss/';
+config.sassSrc = 'scss/';
 config.sassDest = 'assets/css/';
 config.alsoSearchIn = '';
 

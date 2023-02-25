@@ -141,8 +141,8 @@ Minimal configuration:
 
 ```json
 {
-    "guideSrc": "assets/scss/",
-    "guideDest": "guide/",
+    "guideSrc": "path/to/yours/scss/",
+    "guideDest": "path/to/your/static/folder/for/guide/",
     "cssSrc": "assets/css/"
 }
 ```
@@ -157,8 +157,8 @@ or with rawConfig object if you call atlas from js:
 
 ```js
 const atlas = require('atlas-guide-custom').withConfig({
-    guideSrc: 'assets/scss/',
-    guideDest: 'guide/',
+    guideSrc: 'path/to/yours/scss/',
+    guideDest: 'path/to/your/static/folder/for/guide/',
     cssSrc: 'assets/css/'
     // etc
 });
@@ -175,15 +175,15 @@ Suppose you store brand configuration into `package.json`:
   "brands": {
     "one": {
         "guide": {
-            "guideSrc": "assets/scss/",
-            "guideDest": "guide/",
+            "guideSrc": "path/to/yours/scss/",
+            "guideDest": "path/to/your/static/folder/for/guide/",
             "cssSrc": "assets/css/"
         }
     },
     "another": {
         "guide": {
-            "guideSrc": "another/assets/scss/",
-            "guideDest": "another/guide/",
+            "guideSrc": "another/path/to/yours/scss/",
+            "guideDest": "another/path/to/your/static/folder/for/guide/",
             "cssSrc": "another/assets/css/"
         }
     }
