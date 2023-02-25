@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
 const mustache = require('mustache');
-const c = require('ansi-colors');
 const pug = require('pug');
 const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 const renderer = new marked.Renderer();

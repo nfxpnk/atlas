@@ -114,7 +114,7 @@ function makeProjectTree(atlasConfig) {
                 if (isSass) {
                     docSet.coverage.all++;
                 }
-                if (isSass && !isExcludedFile(name) && categoryName != '') {
+                if (isSass && !isExcludedFile(name) && categoryName !== '') {
                     docSet.coverage.covered++;
                     const title2 = path.basename(name, '.scss').replace(/^_/i, '');
                     const id = categoryName + title2;
