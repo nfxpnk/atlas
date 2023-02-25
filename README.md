@@ -242,7 +242,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
     "guideSrc": "project-root/path/to/components/directory/",
     "guideDest": "project-root/path/where/atlas/will/be/placed/",
     "cssSrc": "project-root/path/to/css/",
-    "scssSrc": "project-root/path/to/scss/",
     "scssAdditionalImportsArray": "",
     "componentPrefixes": ["b-", "l-"],
     "excludedCssFiles": "dev_",
@@ -293,7 +292,6 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
 * !`guideSrc` {string} – path to scss files that documented. It is not mandatory that it should be scss root, it could be any folder, but in this case you need to additionaly provide `scssSrc` for statistic reports.
 * !`guideDest` {string} – path to generated files folder.
 * !`cssSrc` {string} – path to generated CSS. Used for statistical reports.
-* `scssSrc` {string} – path to root of SCSS files. Optional. Used for generate statistical reports. It should be used if `guideSrc` is different from scss root. If not defined – `guideSrc` will be used. Proper path to root scss files needed to generate dependencies graph.
 * `scssAdditionalImportsArray` {array} – array of additional sass imports, if they used. Needed for statistical reports and styleguide auto generation.
 * `componentPrefixes` {array of strings} – ['component', 'container'] prefixes that used for components and containers on project. It used to properly guess component types in component structure info (in footer). Ex: `['c-', 'l-']`, `['atlas-', 'l-']`
 * `excludedCssFiles` {regexp} – CSS files that would not be processed in statistical reports.
@@ -497,7 +495,6 @@ Other steps should be simple:
     "guideSrc": "path/to/components/directory/",
     "guideDest": "path/where/atlas/will/be/placed/",
     "cssSrc": "path/to/css/",
-    "scssSrc": "path/to/scss/",
     "scssAdditionalImportsArray": ["path/to/additional/sass/files"],
     "projectConstants": {
         "constantsSrc": ["path/to/project-settings.scss", "path/to/other-file.scss"],
