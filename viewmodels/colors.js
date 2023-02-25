@@ -1,6 +1,8 @@
 'use strict';
 
 const fs = require('fs');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 
 module.exports = function(config, component) {
     function hexToRgb(hex) {
@@ -15,6 +17,11 @@ module.exports = function(config, component) {
 
     // Path to _colors.scss file with all scss variables
     const colorsFile = config.guideSrc + '00-configuration/_colors.scss';
+
+    if (fs.existsSync(colorsFile) === false) {
+        log(c.red('Error: ') + colorsFile + ' doesn\'t exists!');
+        return {};
+    }
 
     const scssData = fs.readFileSync(colorsFile, 'utf8');
 
