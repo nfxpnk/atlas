@@ -21,9 +21,12 @@ const atlas = require('./app/atlas-guide-custom.js').withConfig(currentConfig);
 const config = require(currentConfig);
 
 // Atlas styles source
-config.sassSrc = 'scss/';
-config.sassDest = 'assets/css/';
+config.sassSrc = './scss/';
+config.sassDest = './assets/css/';
 config.alsoSearchIn = '';
+
+log('Style Guide scss folder: ' + c.cyan(config.sassSrc));
+log('Style Guide assets compiled css folder: ' + c.cyan(config.sassDest));
 
 let changedFilePath = '';
 
