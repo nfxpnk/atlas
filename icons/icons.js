@@ -3,6 +3,8 @@
 const fs = require('fs');
 
 const icons = [
+    'x-circle-16',
+    'search-16',
     'info-16',
     'markdown-16',
     'file-16',
