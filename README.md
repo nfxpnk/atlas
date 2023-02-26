@@ -270,8 +270,7 @@ All templates and partials in Atlas could be overwritten. Please see this repo v
         "icons": "",
         "logo": "",
         "navigation": "",
-        "toc": "",
-        "welcome": ""
+        "toc": ""
     },
     "projectConstants": {
         "constantsSrc": ["project-root/path/to/project-settings.scss"],

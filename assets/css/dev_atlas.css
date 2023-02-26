@@ -414,14 +414,6 @@ body {
 	margin-left: 100px;
 }
 
-.atlas-landing__head {
-	align-items: center;
-	background: hsl(53, 92%, 60%);
-	margin: 0 -20px;
-	padding: 20px;
-	padding-right: 0;
-	position: relative;
-}
 .atlas-landing__content {
 	display: flex;
 	position: relative;
@@ -433,33 +425,6 @@ body {
 	height: 90vh;
 	position: sticky;
 	top: 0;
-}
-
-.atlas-welcome {
-	all: initial;
-	color: hsl(210, 0%, 35%);
-	font-family: "Arial", "FreeSans", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow: hidden;
-	position: relative;
-}
-.atlas-welcome__column {
-	display: inline-block;
-	min-width: 33%;
-	vertical-align: top;
-}
-.atlas-welcome__title {
-	font-size: 64px;
-	font-weight: bold;
-	-webkit-hyphens: manual;
-	        hyphens: manual;
-	line-height: 60px;
-	margin-bottom: 20px;
-}
-.atlas-welcome__title strong {
-	display: block;
-	font-weight: bold;
 }
 
 .atlas-component-aside {
