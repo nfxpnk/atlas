@@ -2,30 +2,30 @@
 
 @import "dev-atlas-definitions";
 
-@import "bindings/global/global-normalization";
+@import "global/global-normalization";
 
-@import "bindings/frame/atlas-page";
-@import "bindings/frame/atlas-content";
-@import "bindings/frame/atlas";
-@import "bindings/frame/atlas-overline";
-@import "bindings/frame/atlas-message-global";
+@import "frame/atlas-page";
+@import "frame/atlas-content";
+@import "frame/atlas";
+@import "frame/atlas-overline";
+@import "frame/atlas-message-global";
 
-@import "bindings/guideline/atlas-toc";
-@import "bindings/guideline/atlas-landing";
-@import "bindings/guideline/atlas-welcome";
+@import "guideline/atlas-toc";
+@import "guideline/atlas-landing";
+@import "guideline/atlas-welcome";
 
-@import "bindings/component/atlas-component-aside";
-@import "bindings/component/atlas-info-digit";
-@import "bindings/component/atlas-component-footer";
-@import "bindings/component/atlas-sparkline";
-@import "bindings/component/atlas-info-list";
-@import "bindings/component/atlas-constant";
-@import "bindings/component/atlas-component-structure";
+@import "component/atlas-component-aside";
+@import "component/atlas-info-digit";
+@import "component/atlas-component-footer";
+@import "component/atlas-sparkline";
+@import "component/atlas-info-list";
+@import "component/atlas-constant";
+@import "component/atlas-component-structure";
 
-@import "bindings/styleguide/atlas-copier";
+@import "/styleguide/atlas-copier";
 
 
-/* TODO: Temp location, move to file.scss */
+/* TODO: Temp location, move to some file.scss */
 .atlas-html {
 	padding: 10px;
 	margin-bottom: 20px;
