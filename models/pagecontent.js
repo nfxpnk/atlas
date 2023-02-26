@@ -111,9 +111,10 @@ function mdImport(fileURL, options) {
 
     renderer.code = (code, language) => {
         if (language === undefined) {
-            language = '';
+            language = 'text';
         }
 
+        let parentStyles = null;
         let exampleArray = [];
         const modifierRegexp = new RegExp('<!--\\s+Classes:([\\s\\S]+?)-->', 'ui');
         if (modifierRegexp.test(code) === true) {
@@ -137,13 +138,39 @@ function mdImport(fileURL, options) {
             }
         }
 
+        const parentStylesRegexp = new RegExp('<!--\\s+Parent Styles:([\\s\\S]+?)-->', 'ui');
+        if (parentStylesRegexp.test(code) === true) {
+            let matchStyles = code.match(parentStylesRegexp);
+            if (typeof matchStyles[1] !== 'undefined') {
+                parentStyles = matchStyles[1].trim();
+            }
+        }
+
+        const includeRegexp = new RegExp('<!--\\s+Include:([\\s\\S]+?)-->', 'ui');
+        if (includeRegexp.test(code) === true) {
+            let include = code.match(includeRegexp);
+            if (typeof include[1] !== 'undefined') {
+                include = include[1].trim();
+                include = path.join(path.dirname(fileURL), include);
+                if (fs.existsSync(include) !== false) {
+                    code += '\n\n';
+                    code += fs.readFileSync(include, 'utf8');
+                    code = code.trim();
+                } else {
+                    code += '\n\nFile doesn\'t exists';
+                }
+            }
+        }
+
         const exampleMarkup = mustache.render(elements.example, {
+            style: parentStyles,
             code: code,
             language: language.replace(/_example/, ''),
             title: options.title + '-code-' + codeItemCount
         });
 
         const exampleMarkupArray = mustache.render(elements.exampleArray, {
+            style: parentStyles,
             code: code,
             codeArray: exampleArray,
             language: language.replace(/_example/, ''),

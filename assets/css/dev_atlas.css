@@ -462,36 +462,6 @@ body {
 	font-weight: bold;
 }
 
-.atlas-coverage {
-	border-top: 1px solid;
-	color: hsl(0, 0%, 100%);
-	margin-top: 40px;
-	padding-top: 20px;
-}
-.atlas-coverage__digit {
-	font-size: 32px;
-}
-.atlas-coverage__line {
-	font-size: 19px;
-	margin-bottom: 10px;
-}
-.atlas-coverage__graph-container {
-	height: 8px;
-	margin-bottom: 10px;
-	position: relative;
-	width: 100%;
-}
-.atlas-coverage__graph {
-	position: absolute;
-	width: 100%;
-}
-.atlas-coverage__all {
-	fill: hsl(0, 0%, 100%);
-}
-.atlas-coverage__covered {
-	fill: hsl(210, 0%, 35%);
-}
-
 .atlas-component-aside {
 	all: initial;
 	background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)) no-repeat;
@@ -936,7 +906,7 @@ body {
 	color: hsl(213, 75%, 54%);
 }
 
-/* TODO: Temp location, move to file.scss */
+/* TODO: Temp location, move to some file.scss */
 .atlas-html {
 	padding: 10px;
 	margin-bottom: 20px;
