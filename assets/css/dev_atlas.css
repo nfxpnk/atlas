@@ -588,26 +588,6 @@ body {
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.atlas-sparkline {
-	margin: 10px 0 0 40px;
-	max-width: none;
-	width: 100%;
-}
-.atlas-sparkline__line {
-	transform: translate(5px, 10px);
-}
-.atlas-sparkline__line > path {
-	stroke: url("#atlas-graph-gradient");
-	stroke-linecap: round;
-	stroke-width: 2px;
-}
-.atlas-sparkline__shadow {
-	transform: translate(3px, 3px);
-}
-.atlas-sparkline__shadow > path {
-	stroke: rgba(0, 0, 0, 0.3);
-}
-
 .atlas-info-list {
 	display: flex;
 	flex-wrap: wrap;
