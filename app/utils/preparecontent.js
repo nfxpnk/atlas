@@ -45,7 +45,7 @@ module.exports = function(atlasConfig, projectTree) {
                 const iconsJson = path.join(atlasConfig.guideSrc, 'icons.json');
                 let icons = {};
                 if (fs.existsSync(iconsJson)) {
-                    icons = require(iconsJson);
+                    icons = JSON.parse(fs.readFileSync(iconsJson, 'utf8'));
                 }
                 content = icons;
                 break;
