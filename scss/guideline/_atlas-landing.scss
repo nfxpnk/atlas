@@ -3,17 +3,6 @@ $fg: $color-white-atlas;
 $accent: $atlas-color-text;
 
 .atlas-landing {
-	&__head {
-		align-items: center;
-		background: $bg;
-		margin: 0 -#{$space-md-atlas};
-		padding: $space-md-atlas;
-		padding-right: 0;
-		position: relative;
-	}
-
-	&__head-inner {}
-
 	&__content {
 		display: flex;
 		position: relative;
