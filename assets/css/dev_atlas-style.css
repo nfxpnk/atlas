@@ -124,6 +124,42 @@
 	content: "1 2 3 4 5 6 7 8 9 0";
 }
 
+.b-icons_example {
+	font-size: 14px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: stretch;
+}
+
+.b-icons_example-item {
+	border: 1px solid lightgrey;
+	border-radius: 6px;
+	padding: 10px 5px;
+	flex-basis: 124px;
+}
+
+.b-icons_example-item svg {
+	display: block;
+	margin: 0 auto 10px;
+	background: #dfdfdf;
+}
+
+.b-icons_section h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.b-icons_isml {
+	z-index: 900;
+	position: fixed;
+	top: 10;
+	right: 20px;
+	padding: 10px;
+	background: white;
+	border: 1px solid grey;
+}
+
 .atlas-style-layer {
 	padding-bottom: 100%;
 	position: relative;
