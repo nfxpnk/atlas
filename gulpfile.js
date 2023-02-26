@@ -167,4 +167,4 @@ gulp.task('dev', gulp.parallel('server:up', 'styles:compile:all2', 'scss:watch')
 
 // change to atlas:compile for regular projects, for our cases we compile all atlas in dev workflow
 gulp.task('dev:atlas', gulp.parallel('server:up', 'atlas:compile:all', 'atlas:watch'));
-gulp.task('build', gulp.parallel('styles:compile:all', 'atlas:compile:all'));
+gulp.task('build', gulp.parallel('styles:compile:all', 'styles:compile:all2', 'atlas:compile:all'));

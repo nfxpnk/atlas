@@ -211,11 +211,15 @@
 }
 .atlas-nav__ln {
 	all: initial;
+	align-items: center;
 	color: inherit;
 	cursor: pointer;
+	display: flex;
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 12.8px;
+	gap: 6px;
 	overflow: hidden;
+	padding: 5px 0;
 	position: relative;
 	text-decoration: none;
 	text-overflow: ellipsis;
@@ -223,10 +227,6 @@
 	-webkit-user-select: none;
 	        user-select: none;
 	white-space: nowrap;
-	display: flex;
-	gap: 6px;
-	align-items: center;
-	padding: 5px 0;
 }
 .atlas-nav__ln:hover, .atlas-nav__ln:focus {
 	color: black;
@@ -248,7 +248,7 @@
 	width: 18px;
 }
 .atlas-nav__ln._category svg {
-	color: #2985ba;
+	color: hsl(213, 75%, 54%);
 }
 .atlas-nav__ln._deprecated {
 	text-decoration: line-through;
