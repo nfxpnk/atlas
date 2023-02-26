@@ -114,7 +114,6 @@
 
 	.atlas-nav__ln._category {
 		svg {
-			transition: transform ease 0.4s;
 		}
 	}
 
@@ -134,6 +133,12 @@
 		color: lighten($atlas-color-text, 40%);
 		cursor: default;
 		pointer-events: none;
+
+		&._category {
+			svg {
+				color: lighten($atlas-color-text, 40%);
+			}
+		}
 	}
 }
 

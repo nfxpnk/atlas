@@ -2,8 +2,8 @@
 	position: relative;
 
 	$filter-icon-size: 16px;
-	$clear-icon-size: 14px;
-	$icon-indent: 6px;
+	$clear-icon-size: 16px;
+	$icon-indent: 8px;
 
 	&__input {
 		-webkit-appearance: none;
@@ -13,11 +13,11 @@
 		box-sizing: border-box;
 		font-family: $font-sans-atlas;
 		font-size: 12px;
-		height: 25px;
-		line-height: 25px;
+		height: 34px;
+		line-height: 34px;
 		outline: none;
 		padding: 0 $space-sm-atlas;
-		text-indent: $filter-icon-size;
+		text-indent: $filter-icon-size + 2px;
 		width: 100%;
 
 		&:focus {
@@ -39,7 +39,8 @@
 		height: $filter-icon-size;
 		left: $icon-indent;
 		position: absolute;
-		top: 5px;
+		top: 50%;
+		margin-top: -8px;
 		width: $filter-icon-size;
 
 		.js-found & {
@@ -48,35 +49,45 @@
 	}
 
 	&__clear {
-		background: darken($atlas-aside-bd, 30%);
 		border: none;
-		border-radius: 50%;
 		color: $color-white-atlas;
+		cursor: pointer;
 		height: $clear-icon-size;
 		line-height: $clear-icon-size;
 		outline: none;
+		opacity: 0;
 		padding: 0;
 		position: absolute;
 		right: $icon-indent;
-		top: 6px;
-		transform: scale(0);
-		transition: transform ease 0.2s;
+		top: 50%;
+		margin-top: -8px;
 		width: $clear-icon-size;
 
+		svg {
+			display: block;
+			color: $color-blue-atlas;
+		}
+
 		&:hover {
-			background: darken($atlas-aside-bd, 40%);
+			svg {
+				color: darken($atlas-aside-bd, 40%);
+			}
 		}
 
 		&:focus {
-			background: $color-blue-atlas;
+			svg {
+				color: $color-blue-atlas;
+			}
 		}
 
 		&:active {
-			background: darken($atlas-aside-bd, 50%);
+			svg {
+				color: darken($atlas-aside-bd, 50%);
+			}
 		}
 
 		.js-found & {
-			transform: scale(1);
+			opacity: 1;
 		}
 	}
 }

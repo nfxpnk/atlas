@@ -35,11 +35,11 @@
 	box-sizing: border-box;
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 12px;
-	height: 25px;
-	line-height: 25px;
+	height: 34px;
+	line-height: 34px;
 	outline: none;
 	padding: 0 10px;
-	text-indent: 16px;
+	text-indent: 18px;
 	width: 100%;
 }
 .atlas-search__input:focus {
@@ -54,41 +54,45 @@
 .atlas-search__icon {
 	color: hsl(210, 0%, 35%);
 	height: 16px;
-	left: 6px;
+	left: 8px;
 	position: absolute;
-	top: 5px;
+	top: 50%;
+	margin-top: -8px;
 	width: 16px;
 }
 .js-found .atlas-search__icon {
 	color: hsl(213, 75%, 54%);
 }
 .atlas-search__clear {
-	background: #919191;
 	border: none;
-	border-radius: 50%;
 	color: hsl(0, 0%, 100%);
-	height: 14px;
-	line-height: 14px;
+	cursor: pointer;
+	height: 16px;
+	line-height: 16px;
 	outline: none;
+	opacity: 0;
 	padding: 0;
 	position: absolute;
-	right: 6px;
-	top: 6px;
-	transform: scale(0);
-	transition: transform ease 0.2s;
-	width: 14px;
+	right: 8px;
+	top: 50%;
+	margin-top: -8px;
+	width: 16px;
 }
-.atlas-search__clear:hover {
-	background: #787878;
+.atlas-search__clear svg {
+	display: block;
+	color: hsl(213, 75%, 54%);
 }
-.atlas-search__clear:focus {
-	background: hsl(213, 75%, 54%);
+.atlas-search__clear:hover svg {
+	color: #787878;
 }
-.atlas-search__clear:active {
-	background: #5e5e5e;
+.atlas-search__clear:focus svg {
+	color: hsl(213, 75%, 54%);
+}
+.atlas-search__clear:active svg {
+	color: #5e5e5e;
 }
 .js-found .atlas-search__clear {
-	transform: scale(1);
+	opacity: 1;
 }
 
 .atlas-aside-ctrl {
@@ -282,9 +286,6 @@
 .atlas-nav > .atlas-nav__item .atlas-nav__item .atlas-nav__item .atlas-nav__item > .atlas-nav__ln {
 	padding-left: 80px;
 }
-.atlas-nav .atlas-nav__ln._category svg {
-	transition: transform ease 0.4s;
-}
 .atlas-nav .atlas-nav__ln._category.js-collapsed { /* stylelint-disable-line */ }
 .atlas-nav .atlas-nav__ln._category.js-collapsed svg { /* stylelint-disable-line */
 	transform: rotate(0);
@@ -297,6 +298,9 @@
 	color: #bfbfbf;
 	cursor: default;
 	pointer-events: none;
+}
+.js-searching .atlas-nav__ln._category svg {
+	color: #bfbfbf;
 }
 
 .js-found .atlas-nav__ln {
