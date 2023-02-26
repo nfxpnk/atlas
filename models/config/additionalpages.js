@@ -29,7 +29,7 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         src: indexSrc,
         target: path.join(dest, '/colors.html'),
         type: 'colors',
-        icon: 'colors',
+        icon: 'paintbrush-16',
         isDeprecated: false,
         subPages: themes
     });

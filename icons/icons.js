@@ -38,6 +38,10 @@ for (const icon of icons) {
     code = code.replace('<svg xmlns="http://www.w3.org/2000/svg"', `\t<symbol id="${icon}"`);
     code = code.replace(/(width|height)="\d+" /gmi, '');
     code = code.replace('</svg>', '</symbol>');
+
+    if (code.indexOf('fill="currentColor"') == -1 && code.indexOf('fill = "currentColor"') == -1) {
+        code = code.replace('<path', '<path fill="currentColor"');
+    }
     code += '\r\n';
     html += code;
 }

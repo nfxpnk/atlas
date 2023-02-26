@@ -1,7 +1,6 @@
 .atlas-nav { // atlas-outline-view
 	font-family: $font-sans-atlas;
 	font-size: $atlas-scale-secondary;
-	line-height: 1.2;
 	list-style: none;
 	padding-bottom: $space-md-atlas;
 
@@ -15,15 +14,16 @@
 	}
 
 	&__ln {
+		align-items: center;
 		all: initial;
 		color: inherit;
 		cursor: pointer;
-		display: block;
+		display: flex;
 		font-family: $font-sans-atlas;
 		font-size: $atlas-scale-secondary;
-		line-height: 1.2;
+		gap: 6px;
 		overflow: hidden;
-		padding: 2px 0 4px;
+		padding: 5px 0;
 		position: relative;
 		text-decoration: none;
 		text-overflow: ellipsis;
@@ -55,25 +55,9 @@
 			width: 18px;
 		}
 
-		&._landing {
-			svg {
-				display: none;
-			}
-		}
-
 		&._category {
-			// text-transform: capitalize;
-
 			svg {
-				transform: rotate(90deg);
-				width: 8px;
-			}
-		}
-
-		&._about {
-			svg {
-				margin-right: 3px;
-				width: 15px;
+				color: $color-blue-atlas;
 			}
 		}
 
@@ -92,16 +76,13 @@
 	> .atlas-nav__item {
 		> .atlas-nav__ln {
 			background: $atlas-aside-bg;
-			display: block;
 			padding: $space-sm-atlas 0 $space-sm-atlas $space-md-atlas;
 			position: sticky;
 			top: 0;
 			z-index: 1;
 
 			&::after {
-				$color-shadow: black;
-				background: radial-gradient(farthest-side at 50% 0, rgba($color-shadow, 0.3), rgba($color-shadow, 0)) no-repeat center bottom;
-				background-size: 120% 1px;
+				background: lightgrey;
 				bottom: 0;
 				content: "";
 				height: 1px;

@@ -197,7 +197,6 @@
 .atlas-nav {
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 12.8px;
-	line-height: 1.2;
 	list-style: none;
 	padding-bottom: 20px;
 	/* stylelint-disable */
@@ -214,12 +213,9 @@
 	all: initial;
 	color: inherit;
 	cursor: pointer;
-	display: block;
 	font-family: "Arial", "FreeSans", sans-serif;
 	font-size: 12.8px;
-	line-height: 1.2;
 	overflow: hidden;
-	padding: 2px 0 4px;
 	position: relative;
 	text-decoration: none;
 	text-overflow: ellipsis;
@@ -227,6 +223,10 @@
 	-webkit-user-select: none;
 	        user-select: none;
 	white-space: nowrap;
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	padding: 5px 0;
 }
 .atlas-nav__ln:hover, .atlas-nav__ln:focus {
 	color: black;
@@ -247,16 +247,8 @@
 	vertical-align: text-bottom;
 	width: 18px;
 }
-.atlas-nav__ln._landing svg {
-	display: none;
-}
 .atlas-nav__ln._category svg {
-	transform: rotate(90deg);
-	width: 8px;
-}
-.atlas-nav__ln._about svg {
-	margin-right: 3px;
-	width: 15px;
+	color: #2985ba;
 }
 .atlas-nav__ln._deprecated {
 	text-decoration: line-through;
@@ -267,15 +259,13 @@
 }
 .atlas-nav > .atlas-nav__item > .atlas-nav__ln {
 	background: hsl(0, 0%, 95%);
-	display: block;
 	padding: 10px 0 10px 20px;
 	position: sticky;
 	top: 0;
 	z-index: 1;
 }
 .atlas-nav > .atlas-nav__item > .atlas-nav__ln::after {
-	background: radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)) no-repeat center bottom;
-	background-size: 120% 1px;
+	background: lightgrey;
 	bottom: 0;
 	content: "";
 	height: 1px;
