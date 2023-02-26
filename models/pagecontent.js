@@ -114,6 +114,22 @@ function mdImport(fileURL, options) {
             language = 'text';
         }
 
+        const includeRegexp = new RegExp('<!--\\s+Include:([\\s\\S]+?)-->', 'ui');
+        if (includeRegexp.test(code) === true) {
+            let include = code.match(includeRegexp);
+            if (typeof include[1] !== 'undefined') {
+                include = include[1].trim();
+                include = path.join(path.dirname(fileURL), include);
+                if (fs.existsSync(include) !== false) {
+                    code += '\n\n';
+                    code += fs.readFileSync(include, 'utf8');
+                    code = code.trim();
+                } else {
+                    code += '\n\nFile doesn\'t exists';
+                }
+            }
+        }
+
         let parentStyles = null;
         let exampleArray = [];
         const modifierRegexp = new RegExp('<!--\\s+Classes:([\\s\\S]+?)-->', 'ui');
@@ -143,22 +159,6 @@ function mdImport(fileURL, options) {
             let matchStyles = code.match(parentStylesRegexp);
             if (typeof matchStyles[1] !== 'undefined') {
                 parentStyles = matchStyles[1].trim();
-            }
-        }
-
-        const includeRegexp = new RegExp('<!--\\s+Include:([\\s\\S]+?)-->', 'ui');
-        if (includeRegexp.test(code) === true) {
-            let include = code.match(includeRegexp);
-            if (typeof include[1] !== 'undefined') {
-                include = include[1].trim();
-                include = path.join(path.dirname(fileURL), include);
-                if (fs.existsSync(include) !== false) {
-                    code += '\n\n';
-                    code += fs.readFileSync(include, 'utf8');
-                    code = code.trim();
-                } else {
-                    code += '\n\nFile doesn\'t exists';
-                }
             }
         }
 
