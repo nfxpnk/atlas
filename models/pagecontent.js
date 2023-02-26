@@ -121,8 +121,15 @@ function mdImport(fileURL, options) {
                 include = include[1].trim();
                 include = path.join(path.dirname(fileURL), include);
                 if (fs.existsSync(include) !== false) {
+                    let fileContent = fs.readFileSync(include, 'utf8');
+
+                    if (path.extname(include) === '.pug') {
+                        let pugFn = pug.compile(fileContent, {pretty: true});
+                        fileContent = pugFn().trim();
+                    }
+
                     code += '\n\n';
-                    code += fs.readFileSync(include, 'utf8');
+                    code += fileContent;
                     code = code.trim();
                 } else {
                     code += '\n\nFile doesn\'t exists';
