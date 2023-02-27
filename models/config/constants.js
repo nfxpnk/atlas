@@ -12,8 +12,10 @@ function prepareSCSSConstantsFiles(constantsSrc) {
     let contaminatedSources = '';
 
     sourcesListRaw.forEach(source => {
-        const file = path.join(projectRoot, source);
+        const file = source;
         if (!fs.existsSync(file)) {
+            // TODO: Fix this
+            console.log('NO FILE' + file);
             throw source;
         }
         sourcesList.push(file);
@@ -94,8 +96,7 @@ function getDeclaredConstants(config) {
     }
 
     try {
-        //settingsFilesData = prepareSCSSConstantsFiles(config.projectConstants.constantsSrc);
-        settingsFilesData = {};
+        settingsFilesData = prepareSCSSConstantsFiles(config.projectConstants.constantsSrc);
     } catch (e) {
         log(c.yellow('Warning: ') + '"projectConstants" is declared, but constants file not found (' + e +
             '). Constants could not be fetched.');

@@ -9,7 +9,7 @@ module.exports = function(atlasConfig, projectTree) {
     const renderedPageContent = require(path.resolve(__dirname, '../../models/pagecontent.js'));
 
     // View models
-    //const styleguide = require(path.resolve(__dirname, '../../viewmodels/styleguide.js'));
+    const styleguide = require(path.resolve(__dirname, '../../viewmodels/styleguide.js'));
     const colors = require(path.resolve(__dirname, '../../viewmodels/colors.js'));
     //const themes = require(path.resolve(__dirname, '../../viewmodels/themes.js'));
 
@@ -27,9 +27,9 @@ module.exports = function(atlasConfig, projectTree) {
         }
 
         switch (component.type) {
-            // case 'styleguide':
-            //     content = styleguide(projectConstants);
-            //     break;
+            case 'styleguide':
+                content = styleguide(projectConstants, component);
+                break;
             case 'colors':
                 content = colors(atlasConfig, component);
                 break;

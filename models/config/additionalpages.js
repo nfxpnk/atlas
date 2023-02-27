@@ -56,19 +56,19 @@ function getAdditionalPages(templates, dest, constants, indexSrc) {
         subPages: []
     });
 
-    // if (constants.isDefined) {
-    //     additionalPages.unshift({
-    //         id: 'styleguide',
-    //         title: 'Styleguide',
-    //         src: '',
-    //         target: path.join(dest, '/styleguide.html'),
-    //         template: 'styleguide',
-    //         type: 'styleguide',
-    //         icon: 'styleguide',
-    //         isDeprecated: false,
-    //         subPages: []
-    //     });
-    // }
+    if (constants.isDefined) {
+        additionalPages.unshift({
+            id: 'styleguide',
+            title: 'Styleguide',
+            src: '',
+            target: path.join(dest, '/styleguide.html'),
+            template: 'styleguide',
+            type: 'styleguide',
+            icon: 'book-16',
+            isDeprecated: false,
+            subPages: []
+        });
+    }
 
     return additionalPages;
 }

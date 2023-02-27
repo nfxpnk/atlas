@@ -5,6 +5,8 @@ const postcss = require('postcss');
 const scss = require('postcss-scss');
 const mustache = require('mustache');
 const sass = require('sass');
+const log = require('fancy-log');
+const c = require('ansi-colors');
 
 /**
  * Prepare constants data based on config and declared constants. This will be used to compile CSS
@@ -14,6 +16,8 @@ const sass = require('sass');
  * @return {{rawConstants: Array, fileString: String}}
  */
 function prepareConstantsData(fileString, constantsList) {
+    fileString = fileString.replace(/@mixin[\s\S]+\n}/gi, '');
+
     const fileAST = postcss().process(fileString, { parser: scss }).root;
 
     let rawConstants = [];
@@ -44,22 +48,41 @@ function prepareConstantsData(fileString, constantsList) {
  * @return {string} compiled CSS file string
  */
 function compileStyles(constantsData, additionalSassImports) {
-    const template = '{{>constantsFile}} {{#constants}} {{constNameSafe}} { color: {{constName}} } {{/constants}}';
+    const template = '{{>constantsFile}} {{#constants}} {{constNameSafe}} { color: {{constName}} }\n {{/constants}}';
     let cssString = '';
 
     try {
+        let scssData = mustache.render(
+            template,
+            {constants: constantsData.rawConstants},
+            {constantsFile: constantsData.fileString}
+        );
+
+        const lines = scssData.split('\n');
+
+        const useLines = [];
+        const otherLines = [];
+
+        for (let i = 0; i < lines.length; ++i) {
+            let line = lines[i];
+            if (line.startsWith('@use')) {
+                useLines.push(line.trim());
+            } else {
+                otherLines.push(line.trim());
+            }
+        }
+
+        scssData = useLines.concat(otherLines).join('\n');
+
         const styles = sass.renderSync({
-            data: mustache.render(
-                template,
-                {constants: constantsData.rawConstants},
-                {constantsFile: constantsData.fileString}),
+            data: scssData,
             includePaths: additionalSassImports
         });
         cssString = styles.css.toString();
     } catch (error) {
-        console.log('Warn: Atlas: Could not compile configuration file. ' +
+        log(c.red('Warning: ') + 'Atlas: Could not compile configuration file. ' +
             'Styleguide page and consistency checks could not be prepared.\n' +
-            'Ensure that "scssAdditionalImportsArray" has all additional imports paths.\n', error.formatted);
+            'Ensure that "scssAdditionalImportsArray" has all additional imports paths.\n', c.red(error.formatted));
     }
 
     return cssString;
@@ -113,12 +136,15 @@ function getProjectConstants(constConfig, additionalSassImports) {
     const constRegexpsList = constConfig.constantsList;
     const constFileString = constConfig.constantsFile;
     const imports = additionalSassImports || [];
-    //constConfig.constantsSrc.forEach(item => imports.push(path.dirname(item)));// in case if file itself contain imports
 
-    //const compiledConstants = compileStyles(prepareConstantsData(constFileString, constRegexpsList), imports);
-    //const compiledConstantsAST = postcss().process(compiledConstants, { stringifier: {} }).root;
+    constConfig.constantsSrc.forEach(
+        item => imports.push(path.dirname(item))
+    ); // in case if file itself contain imports
 
-    //return getConstants(compiledConstantsAST, constRegexpsList);
+    const compiledConstants = compileStyles(prepareConstantsData(constFileString, constRegexpsList), imports);
+    const compiledConstantsAST = postcss().process(compiledConstants, { stringifier: {} }).root;
+
+    return getConstants(compiledConstantsAST, constRegexpsList);
 }
 
 module.exports = getProjectConstants;

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(constants) {
+module.exports = function(constants, component) {
     let constantsList = {
         //'color': constants.color,
         'font': constants.font,
@@ -18,5 +18,8 @@ module.exports = function(constants) {
 
     constantsList.breakpointGraph = JSON.stringify(constantsList.breakpoint.map(item => removeUnits(item.value)));
 
-    return constantsList;
+    return {
+        component: component,
+        constantsList: constantsList
+    };
 };

@@ -4,7 +4,7 @@
 <div class="atlas-stat-sizes-page-title">
     <div class="atlas-overline">
         <svg width="16" height="16" role="img">
-            <use href="#icon-styleguide"></use>
+            <use href="#{{ content.documentation.component.icon }}"></use>
         </svg>
         Declared project constants
     </div>
@@ -17,7 +17,7 @@
     </div>
 </div>
 
-{{#content.documentation}}
+{{#content.documentation.constantsList}}
     {{#color.length}}
     <section class="atlas-style-section">
         <div role="heading" aria-level="2" class="atlas-style-section__title">Color palette</div>
@@ -196,7 +196,7 @@
         </section>
     {{/motion.length}}
 
-{{/content.documentation}}
+{{/content.documentation.constantsList}}
 
 
 <script src="assets/js/copier.js"></script>
