@@ -46,7 +46,7 @@
 	font-size: 32px;
 }
 .atlas-style-palette__caption {
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 }
 
@@ -73,7 +73,7 @@
 	content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.";
 }
 .atlas-style-scale__name {
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	min-width: 200px;
 	padding-left: 20px;
@@ -86,7 +86,7 @@
 .atlas-style-font__caption {
 	border-top: 1px solid hsl(0, 0%, 70%);
 	display: flex;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	margin-top: 10px;
 	padding-top: 10px;
@@ -132,7 +132,7 @@
 .atlas-style-layer__box {
 	align-items: center;
 	display: flex;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	height: 100%;
 	justify-content: center;
@@ -145,7 +145,7 @@
 	display: flex;
 }
 .atlas-style-motion__caption {
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	line-height: 20px;
 	min-width: 200px;
@@ -194,7 +194,7 @@
 }
 .atlas-style-space__spacer {
 	background-color: #e6effa;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	position: relative;
 	text-align: center;
@@ -220,7 +220,7 @@
 	bottom: 0;
 	box-sizing: border-box;
 	color: deeppink;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	margin-left: 5px;
 	padding-right: 5px;
@@ -274,7 +274,7 @@
 	background-color: hsl(0, 0%, 100%);
 	box-sizing: border-box;
 	display: flex;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	height: 100px;
 	text-align: center;
@@ -283,7 +283,7 @@
 
 .atlas-style-breaks {
 	display: flex;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 	margin-bottom: 40px;
 }
@@ -309,7 +309,7 @@
 }
 .atlas-style-breaks-graph .atlas-tick-breaks text {
 	fill: deeppink;
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 	font-size: 11px;
 }
 .atlas-style-breaks-graph .atlas-tick-lines line {
@@ -320,6 +320,6 @@
 }
 .atlas-style-breaks-graph .atlas-tick-hints text {
 	fill: hsl(213, 75%, 54%);
-	font-family: "DejaVu Sans Mono", "SFMono-Regular", "Menlo", "Consolas", "Lucida Console", monospace;
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
 }
 /*# sourceMappingURL=dev_atlas-style.css.map */
