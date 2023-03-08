@@ -34,9 +34,7 @@ body {
 }
 
 .atlas-content {
-	all: unset;
 	box-sizing: border-box;
-	color: hsl(210, 0%, 35%);
 	display: block;
 }
 .atlas-content__inner {
@@ -578,7 +576,6 @@ body {
 }
 
 .atlas-constant {
-	all: unset;
 	text-transform: none;
 	width: 100%;
 }
@@ -925,7 +922,6 @@ body {
 	z-index: 10;
 }
 .atlas-copier__text {
-	all: unset;
 	-webkit-appearance: none;
 	        appearance: none;
 	background-color: transparent;

@@ -327,7 +327,6 @@
 }
 
 .atlas-footer-copyright {
-	all: unset;
 	color: hsl(210, 0%, 35%);
 	display: block;
 	font-family: "Arial", "FreeSans", sans-serif;
