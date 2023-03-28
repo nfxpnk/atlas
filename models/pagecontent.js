@@ -192,7 +192,7 @@ function mdImport(fileURL, options) {
 
         codeItemCount += 1;
 
-        if (exampleArray.length > 1) {
+        if (exampleArray.length >= 1) {
             return exampleMarkupArray;
         } else if (language === 'html_example') {
             return exampleMarkup;
