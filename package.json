@@ -22,7 +22,7 @@
     "marked": "^4.3.0",
     "mustache": "^4.2.0",
     "postcss": "^8.4.22",
-    "postcss-scss": "^4.0.6",
+    "postcss-scss": "^4.0.7",
     "pug": "^3.0.2",
     "sass": "^1.61.0"
   },
