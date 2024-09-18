@@ -24,7 +24,7 @@
     "postcss": "^8.4.22",
     "postcss-scss": "^4.0.6",
     "pug": "^3.0.2",
-    "sass": "^1.61.0"
+    "sass": "^1.79.0"
   },
   "devDependencies": {
     "ansi-colors": "^4.1.3",
